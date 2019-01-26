@@ -1,3 +1,62 @@
+// Variables
+
+// Color
+$grey = #68626E
+$purple = #6D36A0
+
+// Fonts
+$text-size = 1.4rem
+$text = $text-size 'Montserrat', sans-serif
+
 *
     margin 0
     padding 0
+
+.aside
+    position fixed
+    height 100vh
+    left 2vw
+    display flex
+    flex-direction column
+    justify-content center
+    nav
+        height 20%
+        position relative
+        &::after
+            content ""
+            height 200%
+            width 1px
+            position absolute
+            right -50%
+            top -50%
+            background $grey
+        ul
+            height 100%
+            display flex
+            flex-direction column
+            list-style none
+            justify-content space-between
+            li
+                a
+                    color $grey
+                    text-decoration none
+                    font $text
+                    transition 0.5s
+                    position relative
+                    &::after
+                        content ""
+                        height 1px
+                        width 30%
+                        position absolute
+                        left -2px
+                        bottom -2px
+                        transform translateX(-100%)
+                        background $purple
+                        opacity 0
+                        transition all 0.3s
+                    &:hover
+                        color $purple
+                        &::after
+                            transform translateX(0)
+                            opacity 1
+                    
