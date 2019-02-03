@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>portfolio</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
 </head>
 <body>
     <div class="aside">
         <img src="images/logo.png" alt="">
         <nav>
             <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Work</a></li>
+                <li><a href="#" class="active">About</a></li>
+                <li><a href="#work">Work</a></li>
                 <li><a href="#">CV</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
@@ -26,5 +26,16 @@
         </div>
         <canvas width="800" height="600" class="canvas js-canvas"></canvas>
     </header>
+    <main>
+        <div id="work" class="project js-project" data-title="Olivier Geffard" data-text="Olivier Geffard is a french artist specialise in aquarelle." data-position="left">
+            <img src="images/mockup_oliviergeffard.jpg" alt="">
+        </div>
+        <div class="project js-project" data-title="DCS" data-text="The digital consultiong summit was an event organise by the ESCP school." data-position="right">
+            <img src="images/mockup_affichedcs.jpg" alt="">
+        </div>
+        <div class="project js-project" data-title="Personnal project" data-text="Here some of my personnal work." data-position="left">
+            <img src="images/mockup_personnal.jpg" alt="">
+        </div>
+    </main>
 </body>
 </html>
