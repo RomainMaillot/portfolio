@@ -75,6 +75,7 @@ window.addEventListener(
 
 const createCirlce = () =>
 {
+    context.clearRect(0,0,$canvas.width,$canvas.height)
     context.beginPath()
     context.arc(cursor.x, cursor.y, 50, 0, Math.PI * 2)
     context.strokeStyle = 'black'
@@ -116,3 +117,36 @@ for(const $item of $nav)
 {
     mouseAnimation($item)
 }
+
+// Reset active
+const resetActive = () =>
+{
+    let $actives = document.querySelectorAll('.active')
+    for(const $active of $actives)
+    {
+        $active.classList.remove('active')
+    }
+}
+
+// Aside active
+window.addEventListener(
+    'scroll',
+    (_e) =>
+    {
+        const $work = document.querySelector('#work')
+        const $workMenu = document.querySelector('.work')
+        const $aboutMenu = document.querySelector('.about')
+        const top = $work.getBoundingClientRect().top
+
+        if(top < 0)
+        {
+            resetActive()
+            $workMenu.classList.add('active')
+        }
+        else
+        {
+            resetActive()
+            $aboutMenu.classList.add('active')
+        }
+    }
+)
