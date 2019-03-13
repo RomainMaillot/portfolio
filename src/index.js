@@ -50,6 +50,13 @@ resize()
 const cursor = {}
 const $mouse = document.querySelector('.mouse')
 let mouseIsHover = false
+let rect = []
+
+
+for(const $img of $imgs)
+{
+    rect.push($img.getBoundingClientRect())
+}
 
 window.addEventListener(
     'mousemove',
@@ -57,18 +64,14 @@ window.addEventListener(
     {
         cursor.x = _e.clientX 
         cursor.y = _e.clientY 
+        
+        // $mouse.style.top = `${cursor.y - 25}px`
+        // $mouse.style.left = `${cursor.x - 25}px`
 
-        $mouse.style.top = `${cursor.y - 25}px`
-        $mouse.style.left = `${cursor.x - 25}px`
-
-        for(const $img of $imgs)
-        {
-            let rect = $img.getBoundingClientRect()
-            if (cursor.x < rect.right && cursor.x > rect.left && cursor.y > rect.top && cursor.y < rect.bottom) 
-            {
-                $mouse.classList.toggle('hover')
-            }
-        }
+        // if (cursor.x < rect[0].right && cursor.x > rect[0].left && cursor.y > rect[0].top && cursor.y < rect[0].bottom) 
+        // {
+        //     $mouse.classList.add('hover')
+        // }
     }
 )
 
@@ -77,7 +80,7 @@ const createCirlce = () =>
 {
     context.clearRect(0,0,$canvas.width,$canvas.height)
     context.beginPath()
-    context.arc(cursor.x, cursor.y, 50, 0, Math.PI * 2)
+    context.arc(cursor.x, cursor.y, 25, 0, Math.PI * 2)
     context.strokeStyle = 'black'
     context.stroke()
 }
@@ -85,38 +88,39 @@ const createCirlce = () =>
 // Animation
 const loop = () =>
 {
-    window.requestAnimationFrame(loop) 
     createCirlce()
+
+    window.requestAnimationFrame(loop) 
 }
 window.requestAnimationFrame(loop)
 
-// Mouse animation
-const mouseAnimation = ($item) =>
-{
-    $item.addEventListener(
-        'mouseenter',
-        () =>
-        {
-            $mouse.classList.toggle('hover')
-        }
-    )
-    $item.addEventListener(
-        'mouseleave',
-        () =>
-        {
-            $mouse.classList.toggle('hover')
-        }
-    )
-}
+// // Mouse animation
+// const mouseAnimation = ($item) =>
+// {
+//     $item.addEventListener(
+//         'mouseenter',
+//         () =>
+//         {
+//             $mouse.classList.toggle('hover')
+//         }
+//     )
+//     $item.addEventListener(
+//         'mouseleave',
+//         () =>
+//         {
+//             $mouse.classList.toggle('hover')
+//         }
+//     )
+// }
 
 // Hover
 const $nav = document.querySelectorAll('.aside li')
 
 
-for(const $item of $nav)
-{
-    mouseAnimation($item)
-}
+// for(const $item of $nav)
+// {
+//     mouseAnimation($item)
+// }
 
 // Reset active
 const resetActive = () =>

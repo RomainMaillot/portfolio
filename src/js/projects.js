@@ -25,7 +25,9 @@ export default class Project
     createImgDiv()
     {
         // Create div img
-        this.imgDiv = document.createElement('div')
+        this.imgDiv = document.createElement('a')
+        this.imgDiv.setAttribute('href',`${this.container.dataset.link}`)
+        this.imgDiv.setAttribute('target','_blank')
         this.imgDiv.classList.add('img')
         this.container.appendChild(this.imgDiv)
 
