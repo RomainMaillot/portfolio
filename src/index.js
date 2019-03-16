@@ -140,7 +140,7 @@ window.addEventListener(
         const $work = document.querySelector('#work')
         const $workMenu = document.querySelector('.work')
         const $aboutMenu = document.querySelector('.about')
-        const top = $work.getBoundingClientRect().top
+        const top = $work.getBoundingClientRect().top - 500
 
         if(top < 0)
         {

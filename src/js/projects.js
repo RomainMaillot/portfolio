@@ -35,6 +35,12 @@ export default class Project
         this.img = this.container.querySelector('img')
         this.container.removeChild(this.img)
         this.imgDiv.appendChild(this.img)
+
+        // Create imgHover text inside of the div
+        this.imgText = document.createElement('p')
+        this.imgText.innerHTML = `${this.container.dataset.hover}`
+        this.imgText.classList.add('imgText')
+        this.imgDiv.appendChild(this.imgText)
     }
 
     createContentDiv()
@@ -63,5 +69,11 @@ export default class Project
         this.title = document.createElement('p')
         this.title.innerText = this.container.dataset.text
         this.textDiv.appendChild(this.title)
+
+        // Create link
+        this.link = document.createElement('a')
+        this.link.setAttribute('href', '#')
+        this.link.innerText = 'case study'
+        this.textDiv.appendChild(this.link)
     }
 }
