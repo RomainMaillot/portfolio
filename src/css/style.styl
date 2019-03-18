@@ -135,7 +135,7 @@ main
                 color $purple
                 font-size 2rem
                 font-family $font-family
-                transform translateY(0)
+                transform translateY(-50%)
                 opacity 0
                 transition 0.3s
                 z-index -10
@@ -143,7 +143,6 @@ main
                 height 100%
                 vertical-align middle
             &:hover .imgText
-                transform translateY(-50%)
                 opacity 0.8
                 z-index 10
         .content
@@ -196,3 +195,19 @@ main
                         will-change transform
                     &:hover::after
                         transform scaleX(1)
+footer 
+    margin-left 15vw
+    ul
+        font $text
+        display flex
+        flex-direction row
+        justify-content space-between
+        list-style none
+        width 60%
+        li
+            a
+                text-decoration none
+                color #000
+    
+    p
+        margin 5vh 0

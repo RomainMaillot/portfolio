@@ -139,10 +139,20 @@ window.addEventListener(
     {
         const $work = document.querySelector('#work')
         const $workMenu = document.querySelector('.work')
+        const $contact = document.querySelector('#contact')
+        const $contactMenu = document.querySelector('.contact')
         const $aboutMenu = document.querySelector('.about')
-        const top = $work.getBoundingClientRect().top - 500
+        const workTop = $work.getBoundingClientRect().top - 500
+        const contactTop = $contact.getBoundingClientRect().top - 800
 
-        if(top < 0)
+        console.log(contactTop)
+
+        if (contactTop < 0)
+        {
+            resetActive()
+            $contactMenu.classList.add('active')
+        }
+        else if(workTop < 0)
         {
             resetActive()
             $workMenu.classList.add('active')
