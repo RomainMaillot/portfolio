@@ -145,8 +145,6 @@ window.addEventListener(
         const workTop = $work.getBoundingClientRect().top - 500
         const contactTop = $contact.getBoundingClientRect().top - 800
 
-        console.log(contactTop)
-
         if (contactTop < 0)
         {
             resetActive()

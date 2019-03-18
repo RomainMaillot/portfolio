@@ -72,6 +72,7 @@ export default class Project
 
         // Create link
         this.link = document.createElement('a')
+        this.link.classList.add('link')
         this.link.setAttribute('href', '#')
         this.link.innerText = 'case study'
         this.textDiv.appendChild(this.link)

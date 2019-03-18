@@ -132,7 +132,7 @@ main
             .imgText
                 position absolute
                 text-transform uppercase
-                color $purple
+                color $grey
                 font-size 2rem
                 font-family $font-family
                 transform translateY(-50%)
@@ -143,7 +143,7 @@ main
                 height 100%
                 vertical-align middle
             &:hover .imgText
-                opacity 0.8
+                opacity 1
                 z-index 10
         .content
             display flex
@@ -181,20 +181,6 @@ main
                     text-transform uppercase
                     margin-top 10%
                     position absolute
-                    &::after
-                        content ""
-                        width 30%
-                        height 2px
-                        position absolute
-                        bottom 0
-                        left 0
-                        background-color $purple
-                        transform scaleX(0)
-                        transform-origin left
-                        transition transform 0.3s
-                        will-change transform
-                    &:hover::after
-                        transform scaleX(1)
 footer 
     margin-left 15vw
     ul
@@ -208,6 +194,26 @@ footer
             a
                 text-decoration none
                 color #000
+                position relative
     
     p
         margin 5vh 0
+        font-family $font-family
+        color $grey
+        font-size 0.8rem
+
+.link
+    &::after
+        content ""
+        width 30%
+        height 2px
+        position absolute
+        bottom 0
+        left 0
+        background-color $purple
+        transform scaleX(0)
+        transform-origin left
+        transition transform 0.3s
+        will-change transform
+    &:hover::after
+        transform scaleX(1)
