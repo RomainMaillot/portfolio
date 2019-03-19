@@ -16,6 +16,8 @@ $title = $title-size $font-family
     padding 0
     // cursor none
     scroll-behavior smooth
+    user-select none
+    overflow-x hidden
 
 .aside
     position fixed
@@ -108,11 +110,13 @@ main
         flex-direction row
         justify-content space-between
         margin 10vw 5vw 10vw 12vw
+        overflow visible
         .img
             width 50%
             position relative
             text-align center
             text-decoration none
+            overflow hidden
             img
                 width 100%
             &::after
@@ -149,6 +153,7 @@ main
             display flex
             flex-direction: column
             width 40%
+            overflow visible
             h3
                 font-size 6em
                 font-family $font-family
@@ -168,6 +173,7 @@ main
                 padding-left 5vw
                 margin-top 5vh
                 position relative
+                overflow visible
                 h2
                     font $title
                     font-weight 600
@@ -202,6 +208,7 @@ footer
         font-family $font-family
         color $grey
         font-size 0.8rem
+        text-align center
 
 .link
     &::after

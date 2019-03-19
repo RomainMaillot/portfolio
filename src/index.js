@@ -143,7 +143,7 @@ window.addEventListener(
         const $contactMenu = document.querySelector('.contact')
         const $aboutMenu = document.querySelector('.about')
         const workTop = $work.getBoundingClientRect().top - 500
-        const contactTop = $contact.getBoundingClientRect().top - 800
+        const contactTop = $contact.getBoundingClientRect().top - 1000
 
         if (contactTop < 0)
         {
