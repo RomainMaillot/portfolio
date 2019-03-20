@@ -25,9 +25,17 @@ export default class Project
     createImgDiv()
     {
         // Create div img
-        this.imgDiv = document.createElement('a')
-        this.imgDiv.setAttribute('href',`${this.container.dataset.link}`)
-        this.imgDiv.setAttribute('target','_blank')
+        if (this.container.dataset.hover == 'see case study') 
+        {
+            this.imgDiv = document.createElement('div')
+            this.imgDiv.classList.add('caselink')
+        }
+        else
+        {
+            this.imgDiv = document.createElement('a')
+            this.imgDiv.setAttribute('href',`${this.container.dataset.link}`)
+            this.imgDiv.setAttribute('target','_blank')
+        }
         this.imgDiv.classList.add('img')
         this.container.appendChild(this.imgDiv)
 
@@ -41,6 +49,7 @@ export default class Project
         this.imgText.innerHTML = `${this.container.dataset.hover}`
         this.imgText.classList.add('imgText')
         this.imgDiv.appendChild(this.imgText)
+
     }
 
     createContentDiv()
@@ -73,6 +82,7 @@ export default class Project
         // Create link
         this.link = document.createElement('a')
         this.link.classList.add('link')
+        this.link.classList.add('caselink')
         this.link.setAttribute('href', '#')
         this.link.innerText = 'case study'
         this.textDiv.appendChild(this.link)

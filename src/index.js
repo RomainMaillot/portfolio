@@ -27,6 +27,7 @@ const $imgs = document.querySelectorAll('.img')
 
 
 // Canvas
+const $header = document.querySelector('header')
 const $canvas = document.querySelector('canvas')
 const context = $canvas.getContext('2d')
 
@@ -75,21 +76,32 @@ window.addEventListener(
     }
 )
 
+// const createCirlce = () =>
+// {
+//     context.clearRect(0,0,$canvas.width,$canvas.height)
+//     context.beginPath()
+//     context.arc(cursor.x, cursor.y, 25, 0, Math.PI * 2)
+//     context.strokeStyle = 'black'
+//     context.stroke()
+// }
 
-const createCirlce = () =>
+let posX = 0, posY = 0
+
+const moveCircle = () =>
 {
     context.clearRect(0,0,$canvas.width,$canvas.height)
     context.beginPath()
-    context.arc(cursor.x, cursor.y, 25, 0, Math.PI * 2)
+    // context.arc(cursor.x, cursor.y, 25, 0, Math.PI * 2)
+    context.arc(posX, posY, 25, 0, Math.PI * 2)
     context.strokeStyle = 'black'
     context.stroke()
 }
+moveCircle()
 
 // Animation
 const loop = () =>
 {
-    createCirlce()
-
+    moveCircle()
     window.requestAnimationFrame(loop) 
 }
 window.requestAnimationFrame(loop)
@@ -162,3 +174,33 @@ window.addEventListener(
         }
     }
 )
+
+// Toggle case study
+const $caseToggles = document.querySelectorAll('.caselink')
+const $caseStudy = document.querySelector('.casestudy')
+const $close = document.querySelector('.close')
+
+for(const $caseToggle of $caseToggles)
+{
+    $caseToggle.addEventListener(
+        'click',
+        () =>
+        {
+            openCase()
+        }
+    )
+}
+
+$close.addEventListener(
+    'click',
+    () =>
+    {
+        openCase()
+    }
+)
+
+// Toggle case study function
+const openCase = () =>
+{
+    $caseStudy.classList.toggle('open')
+}

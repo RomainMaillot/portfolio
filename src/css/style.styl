@@ -187,6 +187,57 @@ main
                     text-transform uppercase
                     margin-top 10%
                     position absolute
+    .casestudy
+        position fixed
+        width 100vw
+        height 100vh
+        top 0
+        left 0
+        background-color white
+        transform translateX(100%)
+        transition transform 0.3s
+        will-change transform
+        display flex
+        flex-direction column
+        justify-content center
+        z-index 40
+        &.open
+            transform translateX(0)
+        p
+            font $title
+            color $purple
+            text-align center
+        .close
+            position absolute
+            top 20px
+            right 20px
+            cursor pointer
+            width 30px
+            height 30px
+            &::after
+                content ""
+                position absolute
+                right 15px
+                width 1px
+                height 30px
+                background-color #000
+                transform rotate(45deg)
+                transition transform 0.3s ease 
+                will-change transform
+            &::before
+                content ""
+                position absolute
+                right 15px
+                width 1px
+                height 30px
+                background-color #000
+                transform rotate(-45deg)
+                transition transform 0.3s ease 
+                will-change transform
+            &:hover::after
+                transform rotate(-45deg)
+            &:hover::before
+                transform rotate(45deg)
 footer 
     margin 0 auto
     width 60vw
@@ -225,3 +276,6 @@ footer
         will-change transform
     &:hover::after
         transform scaleX(1)
+
+.caselink
+    cursor pointer
