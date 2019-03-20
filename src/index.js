@@ -184,8 +184,9 @@ for(const $caseToggle of $caseToggles)
 {
     $caseToggle.addEventListener(
         'click',
-        () =>
+        (_e) =>
         {
+            _e.preventDefault()
             openCase()
         }
     )
