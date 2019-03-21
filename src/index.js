@@ -54,10 +54,10 @@ let mouseIsHover = false
 let rect = []
 
 
-for(const $img of $imgs)
-{
-    rect.push($img.getBoundingClientRect())
-}
+// for(const $img of $imgs)
+// {
+//     rect.push($img.getBoundingClientRect())
+// }
 
 window.addEventListener(
     'mousemove',
@@ -85,16 +85,53 @@ window.addEventListener(
 //     context.stroke()
 // }
 
-let posX = 0, posY = 0
+let posX = 0, posY = 0, arc1 = 0, arc2 = 0, arc3 = 0, arc4 = 0, radius = 0, end = false, circleWidth = $canvas.width*20/100
+const $content = document.querySelector('.content')
+const $aside = document.querySelector('.aside')
+const $body = document.querySelector('body')
 
 const moveCircle = () =>
 {
     context.clearRect(0,0,$canvas.width,$canvas.height)
     context.beginPath()
     // context.arc(cursor.x, cursor.y, 25, 0, Math.PI * 2)
-    context.arc(posX, posY, 25, 0, Math.PI * 2)
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth, arc1, Math.PI * arc1)
     context.strokeStyle = 'black'
     context.stroke()
+    context.beginPath()
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 20, arc2, Math.PI * arc2)
+    context.strokeStyle = 'purple'
+    context.stroke()
+    context.beginPath()
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 50, arc3, Math.PI * arc1)
+    context.strokeStyle = 'black'
+    context.stroke()
+    context.beginPath()
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 80, arc4, Math.PI * arc2)
+    context.strokeStyle = 'purple'
+    context.stroke()
+    arc1 += 0.01
+    arc2 += 0.008
+    arc3 += 0.015
+    arc4 += 0.006
+    if (arc2 >= 3) 
+    {
+        end = true
+        context.beginPath()
+        context.arc($canvas.width/2, $canvas.height/2, radius, 0, Math.PI * 2)
+        context.fillStyle = 'white'
+        context.fill()
+    }
+    if(end == true && radius <= circleWidth)
+    {
+        radius += 3
+    }
+    if (radius > circleWidth) 
+    {
+        $content.classList.add('appear')
+        $aside.classList.add('appear')
+        $body.classList.add('appear')
+    }
 }
 moveCircle()
 

@@ -20,6 +20,9 @@ $title = $title-size $font-family
 
 body
     overflow-x hidden
+    overflow-y hidden
+    &.appear
+        overflow-y visible
 
 .aside
     position fixed
@@ -28,6 +31,12 @@ body
     display flex
     flex-direction column
     justify-content center
+    transform translateX(-100%)
+    opacity 0
+    transition all 0.7s
+    &.appear
+        transform translateX(0)
+        opacity 1
     img
         width 8vw
         position fixed
@@ -94,6 +103,9 @@ header
     align-items center
     text-align center
     .content
+        transform translateY(150%)
+        opacity 0
+        transition all 0.7s ease
         h2
             color $purple
             font-family $font-family
@@ -103,6 +115,9 @@ header
         p
             color $grey
             font $text
+        &.appear
+            transform translateX(0)
+            opacity 1
     canvas
         position absolute
         z-index -1
