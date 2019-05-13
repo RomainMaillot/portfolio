@@ -10,6 +10,9 @@ $title-size = 2.5em
 $font-family = 'Montserrat', sans-serif
 $text = $text-size $font-family
 $title = $title-size $font-family
+$littleScreen = 480px
+$mediumScreen = 768px
+$bigScreen = 1024px
 
 *
     margin 0
@@ -23,6 +26,28 @@ body
     overflow-y hidden
     &.appear
         overflow-y visible
+    @media all and (max-width: $bigScreen) 
+        main,.aside,header
+            display none
+        .responsive
+            display block
+            height 50vh
+            width 100vw
+            display flex
+            justify-content center
+            align-items center
+            font $title
+    @media all and (max-width: $mediumScreen)
+        footer 
+            width 80vw
+    @media all and (max-width: $littleScreen)
+        footer ul
+            font-size 0.8em
+        .responsive>h1
+            font-size 1.2em
+
+.responsive
+    display none
 
 .aside
     position fixed
