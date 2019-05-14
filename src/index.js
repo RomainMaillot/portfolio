@@ -15,16 +15,22 @@ if(module.hot)
 
 // Create dom
 const $projects = document.querySelectorAll('.js-project')
-let index = 0
+const $main = document.querySelector('main')
+let index = 0, load = false
+
+window.addEventListener(
+    'load',
+    () =>
+    {
+        load = true
+    }
+)
 
 for(const $project of $projects)
 {
     index++
     const project = new Project($project, index)
 }
-
-const $imgs = document.querySelectorAll('.img')
-
 
 // Canvas
 const $header = document.querySelector('header')
@@ -85,7 +91,7 @@ window.addEventListener(
 //     context.stroke()
 // }
 
-let posX = 0, posY = 0, arc1 = 0, arc2 = 0, arc3 = 0, arc4 = 0, radius = 0, end = false, circleWidth = $canvas.width*20/100
+let posX = 0, posY = 0, arc1 = 0, arc2 = 0, arc3 = 0, arc4 = 0, radius = 0,end = false, circleWidth = $canvas.width*20/100
 const $content = document.querySelector('.content')
 const $aside = document.querySelector('.aside')
 const $body = document.querySelector('body')
@@ -114,7 +120,7 @@ const moveCircle = () =>
     arc2 += 0.008
     arc3 += 0.015
     arc4 += 0.006
-    if (arc2 >= 3) 
+    if (load == true) 
     {
         end = true
         context.beginPath()
@@ -132,6 +138,13 @@ const moveCircle = () =>
         $aside.classList.add('appear')
         $body.classList.add('appear')
     }
+    // $imgs[2].addEventListener(
+    //     'load',
+    //     () =>
+    //     {
+    //         console.log($imgs)
+    //     }
+    // )
 }
 moveCircle()
 
