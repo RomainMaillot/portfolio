@@ -91,7 +91,7 @@ window.addEventListener(
 //     context.stroke()
 // }
 
-let posX = 0, posY = 0, arc1 = 0, arc2 = 0, arc3 = 0, arc4 = 0, radius = 0,end = false, circleWidth = $canvas.width*20/100
+let posX = 0, posY = 0, arc1 = 0, arc2 = 1*Math.PI, arc3 = 0.5 * Math.PI, arc4 = 1.5 * Math.PI, radius = 0,end = false, circleWidth = $canvas.width*20/100
 const $content = document.querySelector('.content')
 const $aside = document.querySelector('.aside')
 const $body = document.querySelector('body')
@@ -101,23 +101,27 @@ const moveCircle = () =>
     context.clearRect(0,0,$canvas.width,$canvas.height)
     context.beginPath()
     // context.arc(cursor.x, cursor.y, 25, 0, Math.PI * 2)
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth, arc1, Math.PI * arc1)
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth, arc1, arc1 * 1.1)
     context.strokeStyle = 'black'
     context.stroke()
     context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 20, arc2, Math.PI * arc2)
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 20, arc2, arc2 * 1.2)
     context.strokeStyle = 'purple'
     context.stroke()
     context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 50, arc3, Math.PI * arc1)
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 50, arc3, arc3 * 1.3)
     context.strokeStyle = 'black'
     context.stroke()
     context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 80, arc4, Math.PI * arc2)
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 80, arc4, arc4 * 1.4)
     context.strokeStyle = 'purple'
     context.stroke()
-    arc1 += 0.01
-    arc2 += 0.008
+    context.beginPath()
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 110, arc2 / 0.8, arc2 * 1.5)
+    context.strokeStyle = 'black'
+    context.stroke()
+    arc1 += 0.02
+    arc2 += 0.01
     arc3 += 0.015
     arc4 += 0.006
     if (load == true) 
