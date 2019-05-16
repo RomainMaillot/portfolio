@@ -4,31 +4,36 @@
             "project": "Development and design of a website",
             "techno": "HTML, CSS, JS, Sketch",
             "job": "Leader, designer and front-end developer",
-            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!",
+            "link": "http://www.geffard.com/"
         },
         {
             "project": "Development of a webdock",
             "techno": "HTML, CSS, JS",
             "job": "Lead developer",
-            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!",
+            "link": "https://webdocksociety.netlify.com/"
         },
         {
             "project": "Animation work",
             "techno": "HTML, CSS, JS, Sketch",
             "job": "Everything",
-            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!",
+            "link": "https://earthquake-simulator.netlify.com"
         },
         {
             "project": "Design prints & logo",
             "techno": "InDesign, Illustrator",
             "job": "Designer",
-            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!",
+            "link": "Lead developer"
         },
         {
             "project": "Development of a quizz",
             "techno": "React",
             "job": "Front-end developer",
-            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
+            "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!",
+            "link": "https://popquizz.netlify.com/"
         }
     ]
 }

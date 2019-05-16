@@ -25,18 +25,10 @@ export default class Project
     createImgDiv()
     {
         // Create div img
-        if (this.container.dataset.hover == 'see case study') 
-        {
-            this.imgDiv = document.createElement('div')
-            this.imgDiv.classList.add('caselink')
-        }
-        else
-        {
-            this.imgDiv = document.createElement('a')
-            this.imgDiv.setAttribute('href',`${this.container.dataset.link}`)
-            this.imgDiv.setAttribute('target','_blank')
-        }
+        this.imgDiv = document.createElement('div')
+        this.imgDiv.classList.add('caselink')
         this.imgDiv.classList.add('img')
+        this.imgDiv.setAttribute('infos', this.container.dataset.title)
         this.container.appendChild(this.imgDiv)
 
         // Create img inside of the div
@@ -46,7 +38,7 @@ export default class Project
 
         // Create imgHover text inside of the div
         this.imgText = document.createElement('p')
-        this.imgText.innerHTML = `${this.container.dataset.hover}`
+        this.imgText.innerHTML = `see case study`
         this.imgText.classList.add('imgText')
         this.imgDiv.appendChild(this.imgText)
 

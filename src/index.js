@@ -24,6 +24,7 @@ window.addEventListener(
     () =>
     {
         load = true
+        window.scrollTo(0, 0);
     }
 )
 
@@ -238,11 +239,12 @@ const $projectIdea = document.querySelector('.project_idea')
 const $techno = document.querySelector('.techno')
 const $job = document.querySelector('.job')
 const $description = document.querySelector('.description')
+const $link = document.querySelector('.project_link')
 const titles = []
 
 for(const $caseToggle of $caseToggles)
 {
-    if($caseToggle.getAttribute('infos'))
+    if(!titles.includes($caseToggle.getAttribute('infos')))
     {
         titles.push($caseToggle.getAttribute('infos'))
     }
@@ -260,6 +262,7 @@ for(const $caseToggle of $caseToggles)
                     $techno.innerHTML = data.datas[i].techno
                     $job.innerHTML = data.datas[i].job
                     $description.innerHTML = data.datas[i].description
+                    $link.setAttribute('href', data.datas[i].link)
                 }
             }
         }
