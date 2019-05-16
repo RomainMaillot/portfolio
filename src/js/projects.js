@@ -84,6 +84,7 @@ export default class Project
         this.link.classList.add('link')
         this.link.classList.add('caselink')
         this.link.setAttribute('href', '#')
+        this.link.setAttribute('infos', this.container.dataset.title)
         this.link.innerText = 'case study'
         this.textDiv.appendChild(this.link)
     }

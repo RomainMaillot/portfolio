@@ -19,7 +19,7 @@ $bigScreen = 1024px
     padding 0
     // cursor none
     scroll-behavior smooth
-    user-select none
+    // user-select none
 
 body
     overflow-x hidden
@@ -233,10 +233,9 @@ main
                     position absolute
     .casestudy
         position fixed
-        width 100vw
+        width 40vw
         height 100vh
         top 0
-        left 0
         right 0
         bottom 0
         background-color white
@@ -247,12 +246,22 @@ main
         flex-direction column
         justify-content center
         z-index 40
+        box-shadow 0px 0px 8px 0px rgba(0,0,0,0.80)
         &.open
             transform translateX(0)
-        p
-            font $title
-            color $purple
-            text-align center
+        .info
+            width 80%
+            margin 2% auto
+            h3
+                font-family $font-family
+                font-weight normal
+                font-size 1.5rem
+                color $purple
+                margin-bottom 2%
+            p
+                font $text
+                color $grey
+                margin-left 5%
         .close
             position absolute
             top 20px

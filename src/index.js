@@ -1,6 +1,7 @@
 import './css/style.styl'
 
 import Project from './js/projects'
+import * as data from './js/infos.json'
 
 // Hot reload
 if(module.hot)
@@ -233,15 +234,36 @@ window.addEventListener(
 const $caseToggles = document.querySelectorAll('.caselink')
 const $caseStudy = document.querySelector('.casestudy')
 const $close = document.querySelector('.close')
+const $projectIdea = document.querySelector('.project_idea')
+const $techno = document.querySelector('.techno')
+const $team = document.querySelector('.team')
+const $job = document.querySelector('.job')
+const $description = document.querySelector('.description')
+const titles = []
 
 for(const $caseToggle of $caseToggles)
 {
+    if($caseToggle.getAttribute('infos'))
+    {
+        titles.push($caseToggle.getAttribute('infos'))
+    }
     $caseToggle.addEventListener(
         'click',
         (_e) =>
         {
             _e.preventDefault()
             openCase()
+            for(let i = 0;i < data.datas.length;i++)
+            {
+                if($caseToggle.getAttribute('infos') == titles[i])
+                {
+                    $projectIdea.innerHTML = data.datas[i].project
+                    $techno.innerHTML = data.datas[i].techno
+                    $team.innerHTML = data.datas[i].team
+                    $job.innerHTML = data.datas[i].job
+                    $description.innerHTML = data.datas[i].description
+                }
+            }
         }
     )
 }
