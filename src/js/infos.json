@@ -2,37 +2,32 @@
     "datas": [
         {
             "project": "Development and design of a website",
-            "techno": "HTML, CSS, JS",
-            "team": "Gautier.B, Mathias.G, Louis.L",
+            "techno": "HTML, CSS, JS, Sketch",
             "job": "Leader, designer and front-end developer",
             "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
         },
         {
             "project": "Development of a webdock",
             "techno": "HTML, CSS, JS",
-            "team": "Paul.M",
             "job": "Lead developer",
             "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
         },
         {
             "project": "Animation work",
-            "techno": "HTML, CSS, JS",
-            "team": "On my own",
-            "job": "Lead developer",
+            "techno": "HTML, CSS, JS, Sketch",
+            "job": "Everything",
             "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
         },
         {
-            "project": "Développements d'un webdock",
-            "techno": "HTML, CSS, JS",
-            "team": "Paul.M",
-            "job": "Lead developer",
+            "project": "Design prints & logo",
+            "techno": "InDesign, Illustrator",
+            "job": "Designer",
             "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
         },
         {
-            "project": "Développements d'un webdock",
-            "techno": "HTML, CSS, JS",
-            "team": "Paul.M",
-            "job": "Lead developer",
+            "project": "Development of a quizz",
+            "techno": "React",
+            "job": "Front-end developer",
             "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis rerum quod harum assumenda quam omnis beatae temporibus, debitis nobis consequatur perferendis nam eos vero voluptas dolores. Facere dolore nobis corporis!"
         }
     ]
