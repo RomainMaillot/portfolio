@@ -16,7 +16,7 @@ if(module.hot)
 
 // Create dom
 const $projects = document.querySelectorAll('.js-project')
-const $main = document.querySelector('main')
+const $body = document.querySelector('body')
 let index = 0, load = false
 
 window.addEventListener(
@@ -96,7 +96,6 @@ window.addEventListener(
 let posX = 0, posY = 0, arc1 = 0, arc2 = 1*Math.PI, arc3 = 0.5 * Math.PI, arc4 = 1.5 * Math.PI, radius = 0,end = false, circleWidth = $canvas.width*20/100
 const $content = document.querySelector('.content')
 const $aside = document.querySelector('.aside')
-const $body = document.querySelector('body')
 
 const moveCircle = () =>
 {

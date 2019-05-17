@@ -5,8 +5,8 @@ $grey = #68626E
 $purple = #6D36A0
 
 // Fonts
-$text-size = 1.2em
-$title-size = 2.5em
+$text-size = 1.2rem
+$title-size = 2.5rem
 $font-family = 'Montserrat', sans-serif
 $text = $text-size $font-family
 $title = $title-size $font-family
@@ -25,30 +25,43 @@ $bigScreen = 1024px
     scroll-behavior smooth
     // user-select none
 
+html
+    font-size 16px
+    @media all and (max-width: $bigScreen)
+        font-size 11px
+    @media all and (max-width: $littleScreen)
+        font-size 8px
+
 body
     overflow-x hidden
     overflow-y hidden
     &.appear
         overflow-y visible
-    @media all and (max-width: $bigScreen) 
-        main,.aside,header
-            display none
-        .responsive
-            display block
-            height 50vh
-            width 100vw
-            display flex
-            justify-content center
-            align-items center
-            font $title
+    @media all and (max-width: $bigScreen)
+        header 
+            justify-content flex-end
+            .content
+               width 80%
     @media all and (max-width: $mediumScreen)
+        main
+            .project
+                align-items center
+                margin-bottom 20vw
+                .img
+                    width 80%
+                .content
+                    width 80%
+            .project:nth-child(2n+1)
+                flex-direction column
+            .project:nth-child(2n)
+                flex-direction column-reverse
         footer 
             width 80vw
     @media all and (max-width: $littleScreen)
         footer ul
-            font-size 0.8em
+            font-size 0.8rem
         .responsive>h1
-            font-size 1.2em
+            font-size 1.2rem
 
 .responsive
     display none
@@ -138,7 +151,7 @@ header
             color $purple
             font-family $font-family
             font-weight bold
-            font-size 50px
+            font-size 3.5rem
             text-align left
         p
             color $grey
@@ -146,6 +159,7 @@ header
             a
                 position relative
                 text-decoration none
+                color $purple
                 &::after
                     content ""
                     position absolute
@@ -167,11 +181,12 @@ header
         position absolute
         z-index -1
 main
+    margin-left 50px
     .project
         display flex
         flex-direction row
         justify-content space-between
-        margin 10vw 5vw 10vw 12vw
+        margin 10vw 5vw 10vw 10vw
         overflow visible
         .img
             width 50%
@@ -220,7 +235,7 @@ main
             flex-direction: column
             width 40%
             h3
-                font-size 6em
+                font-size 6rem
                 font-family $font-family
                 position relative
                 width fit-content
