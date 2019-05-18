@@ -93,9 +93,10 @@ window.addEventListener(
 //     context.stroke()
 // }
 
-let posX = 0, posY = 0, arc1 = 0, arc2 = 1*Math.PI, arc3 = 0.5 * Math.PI, arc4 = 1.5 * Math.PI, radius = 0,end = false, circleWidth = $canvas.width*20/100
+let posX = 0, posY = 0, arc1 = 0, arc2 = 1*Math.PI, arc3 = 0.5 * Math.PI, arc4 = 1.5 * Math.PI, radius = 0,end = false, circleWidth = $canvas.width*20/100, ratio = $canvas.width/50
 const $content = document.querySelector('.content')
 const $aside = document.querySelector('.aside')
+console.log(ratio)
 
 const moveCircle = () =>
 {
@@ -106,19 +107,19 @@ const moveCircle = () =>
     context.strokeStyle = 'black'
     context.stroke()
     context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 20, arc2, arc2 * 1.2)
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - ratio, arc2, arc2 * 1.2)
     context.strokeStyle = 'purple'
     context.stroke()
     context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 50, arc3, arc3 * 1.3)
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - (ratio*2), arc3, arc3 * 1.3)
     context.strokeStyle = 'black'
     context.stroke()
     context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 80, arc4, arc4 * 1.4)
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - (ratio*3), arc4, arc4 * 1.4)
     context.strokeStyle = 'purple'
     context.stroke()
     context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - 110, arc2 / 0.8, arc2 * 1.5)
+    context.arc($canvas.width/2, $canvas.height/2, circleWidth - (ratio*4), arc2 / 0.8, arc2 * 1.5)
     context.strokeStyle = 'black'
     context.stroke()
     arc1 += 0.02
