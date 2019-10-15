@@ -3,6 +3,8 @@ import './css/style.styl'
 import Project from './js/projects'
 import * as data from './js/infos.json'
 
+import {Curtains} from 'curtainsjs'
+
 // Hot reload
 if(module.hot)
 {
@@ -282,3 +284,46 @@ const openCase = () =>
 {
     $caseStudy.classList.toggle('open')
 }
+
+// wait for everything to be ready
+window.addEventListener("load", function() {
+
+    // set up our WebGL context and append the canvas to our wrapper
+    let curtains = new Curtains({
+        container: "canvas"
+    })
+
+    // get our plane element
+    let planeElements = document.querySelectorAll(".img")
+    let planesCurtains = []
+
+    // set our initial parameters (basic uniforms)
+    let params = {
+        vertexShaderID: "plane-vs", // our vertex shader ID
+        fragmentShaderID: "plane-fs", // our fragment shader ID
+        uniforms: {
+        time: {
+        name: "uTime", // uniform name that will be passed to our shaders
+        type: "1f", // this means our uniform is a float
+        value: 0,
+        },
+    },
+    }
+
+    // create our plane
+    // let plane = curtains.addPlane(planeElement, params)
+
+    // create our planes
+    planeElements.forEach((plane, index) => {
+        planesCurtains.push(curtains.addPlane(plane, params))
+
+        // if our plane has been successfully created
+        if(planesCurtains[index]) {
+            planesCurtains[index].onRender(function() {
+                // use the onRender method of our plane fired at each requestAnimationFrame call
+                planesCurtains[index].uniforms.time.value++; // update our time uniform value
+                planesCurtains[index].updatePosition();
+            })
+        }
+    })
+})

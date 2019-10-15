@@ -35,6 +35,12 @@ html
 body
     overflow-x hidden
     overflow-y hidden
+    #canvas
+        position fixed
+        top 0
+        right 0
+        left 0
+        bottom 0
     &.appear
         overflow-y visible
     @media all and (max-width: $bigScreen)
@@ -190,6 +196,7 @@ main
         overflow visible
         .img
             width 50%
+            height 100%
             position relative
             text-align center
             text-decoration none
@@ -200,6 +207,7 @@ main
             align-items center
             img
                 width 100%
+                opacity 0
             &::after
                 content ""
                 position absolute
