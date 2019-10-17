@@ -28,19 +28,20 @@ for (const $img of $imgs) {
     $img.addEventListener('load',() => {
         imgsLoad.push($img)
         if ((imgsLoad.length + 1) === $imgs.length) {
+            load = true
             createShaders()
         }
     })
 }
 
-window.addEventListener(
-    'load',
-    () =>
-    {
-        load = true
-        window.scrollTo(0, 0);
-    }
-)
+// window.addEventListener(
+//     'load',
+//     () =>
+//     {
+//         load = true
+//         window.scrollTo(0, 0);
+//     }
+// )
 
 for(const $project of $projects)
 {
@@ -366,14 +367,11 @@ const createShaders = () => {
                 // set a fov of 35 to exagerate perspective
                 planesCurtains[index].setPerspective(35);
         
-                // now that our plane is ready we can listen to mouse move event
-                var wrapper = document.querySelector("main")
-        
-                wrapper.addEventListener("mousemove", function(e) {
+                planeElements[index].addEventListener("mousemove", function(e) {
                     handleMovement(e, planesCurtains[index]);
                 });
         
-                wrapper.addEventListener("touchmove", function(e) {
+                planeElements[index].addEventListener("touchmove", function(e) {
                     handleMovement(e, planesCurtains[index]);
                 });
         
