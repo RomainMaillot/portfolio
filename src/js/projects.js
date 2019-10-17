@@ -37,15 +37,15 @@ export default class Project
         this.imgDiv.appendChild(this.img)
 
         // Create div for imgHover text inside of the div
-        this.imgTextDiv = document.createElement('div')
-        this.imgTextDiv.classList.add('imgTextDiv')
-        this.imgDiv.appendChild(this.imgTextDiv)
+        // this.imgTextDiv = document.createElement('div')
+        // this.imgTextDiv.classList.add('imgTextDiv')
+        // this.imgDiv.appendChild(this.imgTextDiv)
 
         // Create imgHover text inside of the div
-        this.imgText = document.createElement('p')
-        this.imgText.innerHTML = `see case study`
-        this.imgText.classList.add('imgText')
-        this.imgTextDiv.appendChild(this.imgText)
+        // this.imgText = document.createElement('p')
+        // this.imgText.innerHTML = `see case study`
+        // this.imgText.classList.add('imgText')
+        // this.imgTextDiv.appendChild(this.imgText)
 
     }
 

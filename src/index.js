@@ -19,7 +19,19 @@ if(module.hot)
 // Create dom
 const $projects = document.querySelectorAll('.js-project')
 const $body = document.querySelector('body')
+const $imgs = document.querySelectorAll('img')
+const imgsLoad = []
 let index = 0, load = false
+
+// Check if all images are load
+for (const $img of $imgs) {
+    $img.addEventListener('load',() => {
+        imgsLoad.push($img)
+        if ((imgsLoad.length + 1) === $imgs.length) {
+            createShaders()
+        }
+    })
+}
 
 window.addEventListener(
     'load',
@@ -285,8 +297,19 @@ const openCase = () =>
     $caseStudy.classList.toggle('open')
 }
 
-// wait for everything to be ready
-window.addEventListener("load", function() {
+// wait for everything to be ready (images) and make some curtains
+const createShaders = () => {
+    // track the mouse positions to send it to the shaders
+    let mousePosition = {
+        x: 0,
+        y: 0,
+    };
+    // we will keep track of the last position in order to calculate the movement strength/delta
+    let mouseLastPosition = {
+        x: 0,
+        y: 0,
+    };
+    let mouseDelta = 0
 
     // set up our WebGL context and append the canvas to our wrapper
     let curtains = new Curtains({
@@ -297,17 +320,37 @@ window.addEventListener("load", function() {
     let planeElements = document.querySelectorAll(".img")
     let planesCurtains = []
 
+    // could be useful to get pixel ratio
+    let pixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1.0
+
     // set our initial parameters (basic uniforms)
     let params = {
         vertexShaderID: "plane-vs", // our vertex shader ID
         fragmentShaderID: "plane-fs", // our fragment shader ID
+        widthSegments: 20,
+        heightSegments: 20,
         uniforms: {
-        time: {
-        name: "uTime", // uniform name that will be passed to our shaders
-        type: "1f", // this means our uniform is a float
-        value: 0,
+            resolution: { // resolution of our plane
+                name: "uResolution",
+                type: "2f", // notice this is an length 2 array of floats
+                value: [2.0, 2.0],
+            },
+            time: { // time uniform that will be updated at each draw call
+                name: "uTime",
+                type: "1f",
+                value: 0,
+            },
+            mousePosition: { // our mouse position
+                name: "uMousePosition",
+                type: "2f", // again an array of floats
+                value: [1.0, 1.0],
+            },
+            mouseMoveStrength: { // the mouse move strength
+                name: "uMouseMoveStrength",
+                type: "1f",
+                value: 0,
+            }
         },
-    },
     }
 
     // create our plane
@@ -319,11 +362,75 @@ window.addEventListener("load", function() {
 
         // if our plane has been successfully created
         if(planesCurtains[index]) {
-            planesCurtains[index].onRender(function() {
+            planesCurtains[index].onReady(function() {
+                // set a fov of 35 to exagerate perspective
+                planesCurtains[index].setPerspective(35);
+        
+                // now that our plane is ready we can listen to mouse move event
+                var wrapper = document.querySelector("main")
+        
+                wrapper.addEventListener("mousemove", function(e) {
+                    handleMovement(e, planesCurtains[index]);
+                });
+        
+                wrapper.addEventListener("touchmove", function(e) {
+                    handleMovement(e, planesCurtains[index]);
+                });
+        
+                // on resize, update the resolution uniform
+                window.addEventListener("resize", function() {
+                    planesCurtains[index].uniforms.resolution.value = [pixelRatio * planeElements[0].clientWidth, pixelRatio * planeElements[0].clientHeight];
+                });
+        
+            }).onRender(function() {
                 // use the onRender method of our plane fired at each requestAnimationFrame call
                 planesCurtains[index].uniforms.time.value++; // update our time uniform value
-                planesCurtains[index].updatePosition();
+
+                // send the new mouse move strength value
+                planesCurtains[index].uniforms.mouseMoveStrength.value = mouseDelta
+
+                // decrease the mouse move strenght a bit : if the user doesn't move the mouse, effect will fade away
+                mouseDelta = Math.max(0, mouseDelta * 0.995)
+                planesCurtains[index].updatePosition()
             })
         }
     })
-})
+    // handle the mouse move event
+    function handleMovement(e, plane) {
+
+        if(mousePosition.x != -100000 && mousePosition.y != -100000) {
+            // if mouse position is defined, set mouse last position
+            mouseLastPosition.x = mousePosition.x;
+            mouseLastPosition.y = mousePosition.y;
+        }
+
+        // touch event
+        if(e.targetTouches) {
+
+            mousePosition.x = e.targetTouches[0].clientX;
+            mousePosition.y = e.targetTouches[0].clientY;
+        }
+        // mouse event
+        else {
+            mousePosition.x = e.clientX;
+            mousePosition.y = e.clientY;
+        }
+
+        // convert our mouse/touch position to coordinates relative to the vertices of the plane
+        var mouseCoords = plane.mouseToPlaneCoords(mousePosition.x, mousePosition.y);
+        // update our mouse position uniform
+        plane.uniforms.mousePosition.value = [mouseCoords.x, mouseCoords.y];
+
+        // calculate the mouse move strength
+        if(mouseLastPosition.x && mouseLastPosition.y) {
+            var delta = Math.sqrt(Math.pow(mousePosition.x - mouseLastPosition.x, 2) + Math.pow(mousePosition.y - mouseLastPosition.y, 2)) / 30;
+            delta = Math.min(4, delta);
+            // update mouseDelta only if it increased
+            if(delta >= mouseDelta) {
+                mouseDelta = delta;
+                // reset our time uniform
+                plane.uniforms.time.value = 0;
+            }
+        }
+    }
+}
