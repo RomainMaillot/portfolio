@@ -29,6 +29,8 @@ export default class Project
         this.imgDiv.classList.add('caselink')
         this.imgDiv.classList.add('img')
         this.imgDiv.setAttribute('infos', this.container.dataset.title)
+        this.imgDiv.setAttribute('data-vs-id', "plane-vs")
+        this.imgDiv.setAttribute('data-fs-id', "plane-fs")
         this.container.appendChild(this.imgDiv)
 
         // Create img inside of the div

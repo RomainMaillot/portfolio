@@ -326,8 +326,6 @@ const createShaders = () => {
 
     // set our initial parameters (basic uniforms)
     let params = {
-        vertexShaderID: "plane-vs", // our vertex shader ID
-        fragmentShaderID: "plane-fs", // our fragment shader ID
         widthSegments: 20,
         heightSegments: 20,
         uniforms: {
@@ -389,6 +387,8 @@ const createShaders = () => {
 
                 // decrease the mouse move strenght a bit : if the user doesn't move the mouse, effect will fade away
                 mouseDelta = Math.max(0, mouseDelta * 0.995)
+                
+                // Handle scroll
                 planesCurtains[index].updatePosition()
             })
         }
@@ -416,6 +416,7 @@ const createShaders = () => {
 
         // convert our mouse/touch position to coordinates relative to the vertices of the plane
         var mouseCoords = plane.mouseToPlaneCoords(mousePosition.x, mousePosition.y);
+        console.log("TCL: handleMovement -> mouseCoords", mouseCoords)
         // update our mouse position uniform
         plane.uniforms.mousePosition.value = [mouseCoords.x, mouseCoords.y];
 
