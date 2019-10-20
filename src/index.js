@@ -32,7 +32,6 @@ for (const $img of $imgs) {
             initCurtains()
             load = true
             if (load) {
-                console.log('load')
                 $content.classList.add('appear')
                 $aside.classList.add('appear')
                 $body.classList.add('appear')
@@ -327,8 +326,8 @@ const createShaders = () => {
 
     // set our initial parameters (basic uniforms)
     let params = {
-        widthSegments: 10,
-        heightSegments: 1,
+        widthSegments: 20,
+        heightSegments: 20,
         uniforms: {
             time: { // time uniform that will be updated at each draw call
                 name: "uTime",
@@ -352,7 +351,7 @@ const createShaders = () => {
     })
 
     function handleExamples(index) {
-        var plane = planesCurtains[index];
+        let plane = planesCurtains[index];
 
         // if there has been an error during init, plane will be null
         if(plane) {
@@ -389,36 +388,36 @@ const createShaders = () => {
 
 function initCurtains() {
     // track the mouse positions to send it to the shaders
-    var mousePosition = {
+    let mousePosition = {
         x: 0,
         y: 0,
     };
     // we will keep track of the last position in order to calculate the movement strength/delta
-    var mouseLastPosition = {
+    let mouseLastPosition = {
         x: 0,
         y: 0,
     };
-    var mouseDelta = 0;
+    let mouseDelta = 0;
 
     // get our plane element
-    var planeElements = document.getElementsByClassName("curtain");
+    let planeElements = document.getElementsByClassName("curtain");
 
 
     // handling errors
-    curtains.onError(function() {
-        // we will add a class to the document body to display original canvas
-        document.body.classList.add("no-curtains");
+    // curtains.onError(function() {
+    //     // we will add a class to the document body to display original canvas
+    //     document.body.classList.add("no-curtains");
 
-        // handle canvas here
-        function animate() {
-            // animate our texture canvas
-            animateTextureCanvas();
+    //     // handle canvas here
+    //     function animate() {
+    //         // animate our texture canvas
+    //         animateTextureCanvas();
 
-            window.requestAnimationFrame(animate);
-        }
+    //         window.requestAnimationFrame(animate);
+    //     }
 
-        animate();
-    });
+    //     animate();
+    // });
 
     function animateTextureCanvas() {
         // here we will handle our canvas texture animation
@@ -427,24 +426,26 @@ function initCurtains() {
         simpleCanvasContext.clearRect(0, 0, simpleCanvas.width, simpleCanvas.height);
 
         // continuously rotate the canvas
-        simpleCanvasContext.translate(simpleCanvas.width / 2, simpleCanvas.height / 2);
-        simpleCanvasContext.rotate(Math.PI / 360);
-        simpleCanvasContext.translate(-simpleCanvas.width / 2, -simpleCanvas.height / 2);
+        // simpleCanvasContext.translate(simpleCanvas.width / 2, simpleCanvas.height / 2);
+        // simpleCanvasContext.rotate(Math.PI / 360);
+        // simpleCanvasContext.translate(-simpleCanvas.width / 2, -simpleCanvas.height / 2);
 
         // draw a red rectangle
-        simpleCanvasContext.fillStyle = "#ff0000";
+        simpleCanvasContext.fillStyle = "#000";
+        // simpleCanvasContext.arc(simpleCanvas.width / 2, simpleCanvas.height / 2, simpleCanvas.width / 8, 0, 2 * Math.PI, true)
+        // simpleCanvasContext.fill()
         simpleCanvasContext.fillRect(simpleCanvas.width / 2 - simpleCanvas.width / 8, simpleCanvas.height / 2 - simpleCanvas.height / 8, simpleCanvas.width / 4, simpleCanvas.height / 4);
     }
 
 
     // could be useful to get pixel ratio
-    var pixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1.0;
+    let pixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1.0;
 
     // some basic parameters
     // we don't need to specifiate vertexShaderID and fragmentShaderID because we already passed it via the data attributes of the plane HTML element
-    var params = {
-        widthSegments: 20,
-        heightSegments: 20,
+    let params = {
+        widthSegments: 100,
+        heightSegments: 100,
         uniforms: {
             resolution: { // resolution of our plane
                 name: "uResolution",
@@ -470,7 +471,7 @@ function initCurtains() {
     };
 
     // create our plane
-    var simplePlane = curtains.addPlane(planeElements[0], params);
+    let simplePlane = curtains.addPlane(planeElements[0], params);
 
     // i our plane has been successfully created
     if(simplePlane) {
@@ -479,7 +480,7 @@ function initCurtains() {
         var simpleCanvasContext = simpleCanvas.getContext("2d");
 
         // get our plane dimensions
-        var planeBoundingRect = simplePlane.getBoundingRect();
+        let planeBoundingRect = simplePlane.getBoundingRect();
 
         // size our canvas
         // we are dividing it by the pixel ratio value to gain performance
@@ -494,7 +495,7 @@ function initCurtains() {
             simplePlane.setPerspective(35);
 
             // now that our plane is ready we can listen to mouse move event
-            var wrapper = document.querySelector("header");
+            let wrapper = document.querySelector("header");
 
             wrapper.addEventListener("mousemove", function(e) {
                 handleMovement(e, simplePlane);
@@ -507,7 +508,7 @@ function initCurtains() {
             // on resize, update the resolution uniform
             window.addEventListener("resize", function() {
                 // get our plane dimensions
-                var planeBoundingRect = simplePlane.getBoundingRect();
+                let planeBoundingRect = simplePlane.getBoundingRect();
 
                 simplePlane.uniforms.resolution.value = [planeBoundingRect.width * curtains.pixelRatio, planeBoundingRect.height * curtains.pixelRatio];
 
@@ -524,7 +525,7 @@ function initCurtains() {
             // send the new mouse move strength value
             simplePlane.uniforms.mouseMoveStrength.value = mouseDelta;
             // decrease the mouse move strenght a bit : if the user doesn't move the mouse, effect will fade away
-            mouseDelta = Math.max(0, mouseDelta * 0.995);
+            // mouseDelta = Math.max(0, mouseDelta * 0.995);
 
             // animate our texture canvas
             animateTextureCanvas();
@@ -553,13 +554,13 @@ function initCurtains() {
         }
 
         // convert our mouse/touch position to coordinates relative to the vertices of the plane
-        var mouseCoords = plane.mouseToPlaneCoords(mousePosition.x, mousePosition.y);
+        let mouseCoords = plane.mouseToPlaneCoords(mousePosition.x, mousePosition.y);
         // update our mouse position uniform
         plane.uniforms.mousePosition.value = [mouseCoords.x, mouseCoords.y];
 
         // calculate the mouse move strength
         if(mouseLastPosition.x && mouseLastPosition.y) {
-            var delta = Math.sqrt(Math.pow(mousePosition.x - mouseLastPosition.x, 2) + Math.pow(mousePosition.y - mouseLastPosition.y, 2)) / 30;
+            let delta = Math.sqrt(Math.pow(mousePosition.x - mouseLastPosition.x, 2) + Math.pow(mousePosition.y - mouseLastPosition.y, 2)) / 30;
             delta = Math.min(4, delta);
             // update mouseDelta only if it increased
             if(delta >= mouseDelta) {
