@@ -111,45 +111,30 @@
         uniform mat4 uMVMatrix;
         uniform mat4 uPMatrix;
 
-        // our texture matrix uniform
-        uniform mat4 simplePlaneTextureMatrix;
-
         // custom variables
         varying vec3 vVertexPosition;
         varying vec2 vTextureCoord;
 
         uniform float uTime;
-        uniform vec2 uResolution;
-        uniform vec2 uMousePosition;
-        uniform float uMouseMoveStrength;
-
 
         void main() {
-
             vec3 vertexPosition = aVertexPosition;
 
-            // get the distance between our vertex and the mouse position
-            float distanceFromMouse = distance(uMousePosition, vec2(vertexPosition.x, vertexPosition.y));
+            // a float varying from -1.5 to 1.5
+            float waveCoords = ((uTime / 45.0) * 3.5) - 1.75;
 
-            // calculate our wave effect
-            float waveSinusoid = cos(5.0 * (distanceFromMouse - (uTime / 75.0)));
+            // distance from the waveCoords to the vertex coordinates
+            float distanceToWave = distance(vec2(vertexPosition.x, 0.0), vec2(waveCoords, 0.0));
 
-            // attenuate the effect based on mouse distance
-            float distanceStrength = (0.4 / (distanceFromMouse + 0.4));
+            //vertexPosition.z = -2.0;
 
-            // calculate our distortion effect
-            float distortionEffect = distanceStrength * waveSinusoid * uMouseMoveStrength;
-
-            // apply it to our vertex position
-            vertexPosition.z +=  distortionEffect / 15.0;
-            vertexPosition.x +=  (distortionEffect / 15.0 * (uResolution.x / uResolution.y) * (uMousePosition.x - vertexPosition.x));
-            vertexPosition.y +=  distortionEffect / 15.0 * (uMousePosition.y - vertexPosition.y);
+            // nice little wave animation from left to right or right to left depending on the timer
+            vertexPosition.z -= cos(clamp(distanceToWave, 0.0, 0.75) * 3.141592);
 
             gl_Position = uPMatrix * uMVMatrix * vec4(vertexPosition, 1.0);
 
             // varyings
-            // here we use our texture matrix to calculate correct texture coords values
-            vTextureCoord = (simplePlaneTextureMatrix * vec4(aTextureCoord, 0.0, 1.0)).xy;
+            vTextureCoord = aTextureCoord;
             vVertexPosition = vertexPosition;
         }
     </script>
@@ -160,31 +145,18 @@
         #endif
 
         uniform float uTime;
-        uniform vec2 uResolution;
-        uniform vec2 uMousePosition;
 
         varying vec3 vVertexPosition;
         varying vec2 vTextureCoord;
-        varying vec2 vTextureMatrixCoord;
 
-        uniform sampler2D simplePlaneTexture;
+        uniform sampler2D uExample;
 
 
         void main( void ) {
 
             // get our texture coords
             vec2 textureCoords = vec2(vTextureCoord.x, vTextureCoord.y);
-
-            // apply our texture
-            vec4 finalColor = texture2D(simplePlaneTexture, textureCoords);
-
-            // fake shadows based on vertex position along Z axis
-            finalColor.rgb -= clamp(-vVertexPosition.z, 0.0, 1.0);
-            // fake lights based on vertex position along Z axis
-            finalColor.rgb += clamp(vVertexPosition.z, 0.0, 1.0);
-
-            // handling premultiplied alpha (useful if we were using a png with transparency)
-            finalColor = vec4(finalColor.rgb * finalColor.a, finalColor.a);
+            vec4 finalColor = texture2D(uExample, textureCoords);
 
             gl_FragColor = finalColor;
         }

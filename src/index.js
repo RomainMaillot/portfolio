@@ -326,29 +326,14 @@ const createShaders = () => {
 
     // set our initial parameters (basic uniforms)
     let params = {
-        widthSegments: 20,
-        heightSegments: 20,
+        widthSegments: 10,
+        heightSegments: 1,
         uniforms: {
-            resolution: { // resolution of our plane
-                name: "uResolution",
-                type: "2f", // notice this is an length 2 array of floats
-                value: [2.0, 2.0],
-            },
             time: { // time uniform that will be updated at each draw call
                 name: "uTime",
                 type: "1f",
                 value: 0,
             },
-            mousePosition: { // our mouse position
-                name: "uMousePosition",
-                type: "2f", // again an array of floats
-                value: [1.0, 1.0],
-            },
-            mouseMoveStrength: { // the mouse move strength
-                name: "uMouseMoveStrength",
-                type: "1f",
-                value: 0,
-            }
         },
     }
 
@@ -361,75 +346,42 @@ const createShaders = () => {
 
         // if our plane has been successfully created
         if(planesCurtains[index]) {
-            planesCurtains[index].onReady(function() {
-                // set a fov of 35 to exagerate perspective
-                planesCurtains[index].setPerspective(35);
-        
-                planeElements[index].addEventListener("mousemove", function(e) {
-                    handleMovement(e, planesCurtains[index]);
-                });
-        
-                planeElements[index].addEventListener("touchmove", function(e) {
-                    handleMovement(e, planesCurtains[index]);
-                });
-        
-                // on resize, update the resolution uniform
-                window.addEventListener("resize", function() {
-                    planesCurtains[index].uniforms.resolution.value = [pixelRatio * planeElements[0].clientWidth, pixelRatio * planeElements[0].clientHeight];
-                });
-        
-            }).onRender(function() {
-                // use the onRender method of our plane fired at each requestAnimationFrame call
-                planesCurtains[index].uniforms.time.value++; // update our time uniform value
-
-                // send the new mouse move strength value
-                planesCurtains[index].uniforms.mouseMoveStrength.value = mouseDelta
-
-                // decrease the mouse move strenght a bit : if the user doesn't move the mouse, effect will fade away
-                mouseDelta = Math.max(0, mouseDelta * 0.995)
-                
-                // Handle scroll
-                planesCurtains[index].updatePosition()
-            })
+            handleExamples(index)
         }
     })
-    // handle the mouse move event
-    function handleMovement(e, plane) {
 
-        if(mousePosition.x != -100000 && mousePosition.y != -100000) {
-            // if mouse position is defined, set mouse last position
-            mouseLastPosition.x = mousePosition.x;
-            mouseLastPosition.y = mousePosition.y;
+    function handleExamples(index) {
+        var plane = planesCurtains[index];
+
+        // if there has been an error during init, plane will be null
+        if(plane) {
+            plane.onReady(function() {
+
+                plane.mouseOver = false;
+
+                planeElements[index].addEventListener("mouseenter", function(e) {
+                    plane.mouseOver = true;
+                });
+
+                planeElements[index].addEventListener("mouseleave", function(e) {
+                    plane.mouseOver = false;
+                });
+
+            }).onRender(function() {
+                if(plane.mouseOver) {
+                    plane.uniforms.time.value = Math.min(45, plane.uniforms.time.value + 1);
+                }
+                else {
+                    plane.uniforms.time.value = Math.max(0, plane.uniforms.time.value - 1);
+                }
+
+                plane.updatePosition();
+            }).onLeaveView(function() {
+                //console.log("leaving view", plane.index);
+            }).onReEnterView(function() {
+                //console.log("entering view", plane.index);
+            });
         }
 
-        // touch event
-        if(e.targetTouches) {
-
-            mousePosition.x = e.targetTouches[0].clientX;
-            mousePosition.y = e.targetTouches[0].clientY;
-        }
-        // mouse event
-        else {
-            mousePosition.x = e.clientX;
-            mousePosition.y = e.clientY;
-        }
-
-        // convert our mouse/touch position to coordinates relative to the vertices of the plane
-        var mouseCoords = plane.mouseToPlaneCoords(mousePosition.x, mousePosition.y);
-        console.log("TCL: handleMovement -> mouseCoords", mouseCoords)
-        // update our mouse position uniform
-        plane.uniforms.mousePosition.value = [mouseCoords.x, mouseCoords.y];
-
-        // calculate the mouse move strength
-        if(mouseLastPosition.x && mouseLastPosition.y) {
-            var delta = Math.sqrt(Math.pow(mousePosition.x - mouseLastPosition.x, 2) + Math.pow(mousePosition.y - mouseLastPosition.y, 2)) / 30;
-            delta = Math.min(4, delta);
-            // update mouseDelta only if it increased
-            if(delta >= mouseDelta) {
-                mouseDelta = delta;
-                // reset our time uniform
-                plane.uniforms.time.value = 0;
-            }
-        }
     }
 }
