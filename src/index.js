@@ -28,8 +28,15 @@ for (const $img of $imgs) {
     $img.addEventListener('load',() => {
         imgsLoad.push($img)
         if ((imgsLoad.length + 1) === $imgs.length) {
-            load = true
             createShaders()
+            initCurtains()
+            load = true
+            if (load) {
+                console.log('load')
+                $content.classList.add('appear')
+                $aside.classList.add('appear')
+                $body.classList.add('appear')
+            }
         }
     })
 }
@@ -53,6 +60,8 @@ for(const $project of $projects)
 const $header = document.querySelector('header')
 const $canvas = document.querySelector('canvas')
 const context = $canvas.getContext('2d')
+const $content = document.querySelector('.content')
+const $aside = document.querySelector('.aside')
 
 // Resize
 let windowWidth = $canvas.width
@@ -99,83 +108,75 @@ window.addEventListener(
     }
 )
 
-// const createCirlce = () =>
+// Circle animation on canvas
+// let posX = 0, posY = 0, arc1 = 0, arc2 = 1*Math.PI, arc3 = 0.5 * Math.PI, arc4 = 1.5 * Math.PI, radius = 0,end = false, circleWidth = $canvas.width*20/100, ratio = $canvas.width/50
+// const $content = document.querySelector('.content')
+// const $aside = document.querySelector('.aside')
+// console.log(ratio)
+
+// const moveCircle = () =>
 // {
 //     context.clearRect(0,0,$canvas.width,$canvas.height)
 //     context.beginPath()
-//     context.arc(cursor.x, cursor.y, 25, 0, Math.PI * 2)
+//     // context.arc(cursor.x, cursor.y, 25, 0, Math.PI * 2)
+//     context.arc($canvas.width/2, $canvas.height/2, circleWidth, arc1, arc1 * 1.1)
 //     context.strokeStyle = 'black'
 //     context.stroke()
+//     context.beginPath()
+//     context.arc($canvas.width/2, $canvas.height/2, circleWidth - ratio, arc2, arc2 * 1.2)
+//     context.strokeStyle = 'purple'
+//     context.stroke()
+//     context.beginPath()
+//     context.arc($canvas.width/2, $canvas.height/2, circleWidth - (ratio*2), arc3, arc3 * 1.3)
+//     context.strokeStyle = 'black'
+//     context.stroke()
+//     context.beginPath()
+//     context.arc($canvas.width/2, $canvas.height/2, circleWidth - (ratio*3), arc4, arc4 * 1.4)
+//     context.strokeStyle = 'purple'
+//     context.stroke()
+//     context.beginPath()
+//     context.arc($canvas.width/2, $canvas.height/2, circleWidth - (ratio*4), arc2 / 0.8, arc2 * 1.5)
+//     context.strokeStyle = 'black'
+//     context.stroke()
+//     arc1 += 0.02
+//     arc2 += 0.01
+//     arc3 += 0.015
+//     arc4 += 0.006
+//     if (load == true) 
+//     {
+//         end = true
+//         context.beginPath()
+//         context.arc($canvas.width/2, $canvas.height/2, radius, 0, Math.PI * 2)
+//         context.fillStyle = 'white'
+//         context.fill()
+//     }
+//     if(end == true && radius <= circleWidth)
+//     {
+//         radius += 3
+//     }
+//     if (radius > circleWidth) 
+//     {
+//         $content.classList.add('appear')
+//         $aside.classList.add('appear')
+//         $body.classList.add('appear')
+//     }
+//     // $imgs[2].addEventListener(
+//     //     'load',
+//     //     () =>
+//     //     {
+//     //         console.log($imgs)
+//     //     }
+//     // )
 // }
+// moveCircle()
 
-let posX = 0, posY = 0, arc1 = 0, arc2 = 1*Math.PI, arc3 = 0.5 * Math.PI, arc4 = 1.5 * Math.PI, radius = 0,end = false, circleWidth = $canvas.width*20/100, ratio = $canvas.width/50
-const $content = document.querySelector('.content')
-const $aside = document.querySelector('.aside')
-console.log(ratio)
-
-const moveCircle = () =>
-{
-    context.clearRect(0,0,$canvas.width,$canvas.height)
-    context.beginPath()
-    // context.arc(cursor.x, cursor.y, 25, 0, Math.PI * 2)
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth, arc1, arc1 * 1.1)
-    context.strokeStyle = 'black'
-    context.stroke()
-    context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - ratio, arc2, arc2 * 1.2)
-    context.strokeStyle = 'purple'
-    context.stroke()
-    context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - (ratio*2), arc3, arc3 * 1.3)
-    context.strokeStyle = 'black'
-    context.stroke()
-    context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - (ratio*3), arc4, arc4 * 1.4)
-    context.strokeStyle = 'purple'
-    context.stroke()
-    context.beginPath()
-    context.arc($canvas.width/2, $canvas.height/2, circleWidth - (ratio*4), arc2 / 0.8, arc2 * 1.5)
-    context.strokeStyle = 'black'
-    context.stroke()
-    arc1 += 0.02
-    arc2 += 0.01
-    arc3 += 0.015
-    arc4 += 0.006
-    if (load == true) 
-    {
-        end = true
-        context.beginPath()
-        context.arc($canvas.width/2, $canvas.height/2, radius, 0, Math.PI * 2)
-        context.fillStyle = 'white'
-        context.fill()
-    }
-    if(end == true && radius <= circleWidth)
-    {
-        radius += 3
-    }
-    if (radius > circleWidth) 
-    {
-        $content.classList.add('appear')
-        $aside.classList.add('appear')
-        $body.classList.add('appear')
-    }
-    // $imgs[2].addEventListener(
-    //     'load',
-    //     () =>
-    //     {
-    //         console.log($imgs)
-    //     }
-    // )
-}
-moveCircle()
-
-// Animation
-const loop = () =>
-{
-    moveCircle()
-    window.requestAnimationFrame(loop) 
-}
-window.requestAnimationFrame(loop)
+// // Animation
+// const loop = () =>
+// {
+//     moveCircle()
+//     window.requestAnimationFrame(loop) 
+// }
+// window.requestAnimationFrame(loop)
 
 // // Mouse animation
 // const mouseAnimation = ($item) =>
@@ -298,6 +299,11 @@ const openCase = () =>
     $caseStudy.classList.toggle('open')
 }
 
+// set up our WebGL context and append the canvas to our wrapper
+let curtains = new Curtains({
+    container: "canvas"
+})
+
 // wait for everything to be ready (images) and make some curtains
 const createShaders = () => {
     // track the mouse positions to send it to the shaders
@@ -311,11 +317,6 @@ const createShaders = () => {
         y: 0,
     };
     let mouseDelta = 0
-
-    // set up our WebGL context and append the canvas to our wrapper
-    let curtains = new Curtains({
-        container: "canvas"
-    })
 
     // get our plane element
     let planeElements = document.querySelectorAll(".img")
@@ -383,5 +384,189 @@ const createShaders = () => {
             });
         }
 
+    }
+}
+
+function initCurtains() {
+    // track the mouse positions to send it to the shaders
+    var mousePosition = {
+        x: 0,
+        y: 0,
+    };
+    // we will keep track of the last position in order to calculate the movement strength/delta
+    var mouseLastPosition = {
+        x: 0,
+        y: 0,
+    };
+    var mouseDelta = 0;
+
+    // get our plane element
+    var planeElements = document.getElementsByClassName("curtain");
+
+
+    // handling errors
+    curtains.onError(function() {
+        // we will add a class to the document body to display original canvas
+        document.body.classList.add("no-curtains");
+
+        // handle canvas here
+        function animate() {
+            // animate our texture canvas
+            animateTextureCanvas();
+
+            window.requestAnimationFrame(animate);
+        }
+
+        animate();
+    });
+
+    function animateTextureCanvas() {
+        // here we will handle our canvas texture animation
+
+        // clear scene
+        simpleCanvasContext.clearRect(0, 0, simpleCanvas.width, simpleCanvas.height);
+
+        // continuously rotate the canvas
+        simpleCanvasContext.translate(simpleCanvas.width / 2, simpleCanvas.height / 2);
+        simpleCanvasContext.rotate(Math.PI / 360);
+        simpleCanvasContext.translate(-simpleCanvas.width / 2, -simpleCanvas.height / 2);
+
+        // draw a red rectangle
+        simpleCanvasContext.fillStyle = "#ff0000";
+        simpleCanvasContext.fillRect(simpleCanvas.width / 2 - simpleCanvas.width / 8, simpleCanvas.height / 2 - simpleCanvas.height / 8, simpleCanvas.width / 4, simpleCanvas.height / 4);
+    }
+
+
+    // could be useful to get pixel ratio
+    var pixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1.0;
+
+    // some basic parameters
+    // we don't need to specifiate vertexShaderID and fragmentShaderID because we already passed it via the data attributes of the plane HTML element
+    var params = {
+        widthSegments: 20,
+        heightSegments: 20,
+        uniforms: {
+            resolution: { // resolution of our plane
+                name: "uResolution",
+                type: "2f", // notice this is an length 2 array of floats
+                value: [pixelRatio * planeElements[0].clientWidth, pixelRatio * planeElements[0].clientHeight],
+            },
+            time: { // time uniform that will be updated at each draw call
+                name: "uTime",
+                type: "1f",
+                value: 0,
+            },
+            mousePosition: { // our mouse position
+                name: "uMousePosition",
+                type: "2f", // again an array of floats
+                value: [mousePosition.x, mousePosition.y],
+            },
+            mouseMoveStrength: { // the mouse move strength
+                name: "uMouseMoveStrength",
+                type: "1f",
+                value: 0,
+            }
+        }
+    };
+
+    // create our plane
+    var simplePlane = curtains.addPlane(planeElements[0], params);
+
+    // i our plane has been successfully created
+    if(simplePlane) {
+        // our texture canvas
+        var simpleCanvas = document.querySelector(".js-canvas");
+        var simpleCanvasContext = simpleCanvas.getContext("2d");
+
+        // get our plane dimensions
+        var planeBoundingRect = simplePlane.getBoundingRect();
+
+        // size our canvas
+        // we are dividing it by the pixel ratio value to gain performance
+        simpleCanvas.width = planeBoundingRect.width / curtains.pixelRatio;
+        simpleCanvas.height = planeBoundingRect.height / curtains.pixelRatio;
+
+        simplePlane.onReady(function() {
+            // display the button
+            document.body.classList.add("curtains-ready");
+
+            // set a fov of 35 to exagerate perspective
+            simplePlane.setPerspective(35);
+
+            // now that our plane is ready we can listen to mouse move event
+            var wrapper = document.querySelector("header");
+
+            wrapper.addEventListener("mousemove", function(e) {
+                handleMovement(e, simplePlane);
+            });
+
+            wrapper.addEventListener("touchmove", function(e) {
+                handleMovement(e, simplePlane);
+            });
+
+            // on resize, update the resolution uniform
+            window.addEventListener("resize", function() {
+                // get our plane dimensions
+                var planeBoundingRect = simplePlane.getBoundingRect();
+
+                simplePlane.uniforms.resolution.value = [planeBoundingRect.width * curtains.pixelRatio, planeBoundingRect.height * curtains.pixelRatio];
+
+                // size our canvas
+                // we are dividing it by the pixel ratio value to gain performance
+                simpleCanvas.width = planeBoundingRect.width / curtains.pixelRatio;
+                simpleCanvas.height = planeBoundingRect.height / curtains.pixelRatio;
+            });
+
+        }).onRender(function() {
+            // increment our time uniform
+            simplePlane.uniforms.time.value++;
+
+            // send the new mouse move strength value
+            simplePlane.uniforms.mouseMoveStrength.value = mouseDelta;
+            // decrease the mouse move strenght a bit : if the user doesn't move the mouse, effect will fade away
+            mouseDelta = Math.max(0, mouseDelta * 0.995);
+
+            // animate our texture canvas
+            animateTextureCanvas();
+        });
+    }
+
+    // handle the mouse move event
+    function handleMovement(e, plane) {
+
+        if(mousePosition.x != -100000 && mousePosition.y != -100000) {
+            // if mouse position is defined, set mouse last position
+            mouseLastPosition.x = mousePosition.x;
+            mouseLastPosition.y = mousePosition.y;
+        }
+
+        // touch event
+        if(e.targetTouches) {
+
+            mousePosition.x = e.targetTouches[0].clientX;
+            mousePosition.y = e.targetTouches[0].clientY;
+        }
+        // mouse event
+        else {
+            mousePosition.x = e.clientX;
+            mousePosition.y = e.clientY;
+        }
+
+        // convert our mouse/touch position to coordinates relative to the vertices of the plane
+        var mouseCoords = plane.mouseToPlaneCoords(mousePosition.x, mousePosition.y);
+        // update our mouse position uniform
+        plane.uniforms.mousePosition.value = [mouseCoords.x, mouseCoords.y];
+
+        // calculate the mouse move strength
+        if(mouseLastPosition.x && mouseLastPosition.y) {
+            var delta = Math.sqrt(Math.pow(mousePosition.x - mouseLastPosition.x, 2) + Math.pow(mousePosition.y - mouseLastPosition.y, 2)) / 30;
+            delta = Math.min(4, delta);
+            // update mouseDelta only if it increased
+            if(delta >= mouseDelta) {
+                mouseDelta = delta;
+                // reset our time uniform
+                plane.uniforms.time.value = 0;
+            }
+        }
     }
 }
