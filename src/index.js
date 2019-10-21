@@ -30,12 +30,9 @@ for (const $img of $imgs) {
         if ((imgsLoad.length + 1) === $imgs.length) {
             createShaders()
             initCurtains()
-            load = true
-            if (load) {
-                $content.classList.add('appear')
-                $aside.classList.add('appear')
-                $body.classList.add('appear')
-            }
+            $content.classList.add('appear')
+            $aside.classList.add('appear')
+            $body.classList.add('appear')
         }
     })
 }
@@ -247,56 +244,56 @@ window.addEventListener(
 )
 
 // Toggle case study
-const $caseToggles = document.querySelectorAll('.caselink')
-const $caseStudy = document.querySelector('.casestudy')
-const $close = document.querySelector('.close')
-const $projectIdea = document.querySelector('.project_idea')
-const $techno = document.querySelector('.techno')
-const $job = document.querySelector('.job')
-const $description = document.querySelector('.description')
-const $link = document.querySelector('.project_link')
-const titles = []
+// const $caseToggles = document.querySelectorAll('.caselink')
+// const $caseStudy = document.querySelector('.casestudy')
+// const $close = document.querySelector('.close')
+// const $projectIdea = document.querySelector('.project_idea')
+// const $techno = document.querySelector('.techno')
+// const $job = document.querySelector('.job')
+// const $description = document.querySelector('.description')
+// const $link = document.querySelector('.project_link')
+// const titles = []
 
-for(const $caseToggle of $caseToggles)
-{
-    if(!titles.includes($caseToggle.getAttribute('infos')))
-    {
-        titles.push($caseToggle.getAttribute('infos'))
-    }
-    $caseToggle.addEventListener(
-        'click',
-        (_e) =>
-        {
-            _e.preventDefault()
-            openCase()
-            for(let i = 0; i < data.datas.length; i++)
-            {
-                if($caseToggle.getAttribute('infos') == titles[i])
-                {
-                    $projectIdea.innerHTML = data.datas[i].project
-                    $techno.innerHTML = data.datas[i].techno
-                    $job.innerHTML = data.datas[i].job
-                    $description.innerHTML = data.datas[i].description
-                    $link.setAttribute('href', data.datas[i].link)
-                }
-            }
-        }
-    )
-}
+// for(const $caseToggle of $caseToggles)
+// {
+//     if(!titles.includes($caseToggle.getAttribute('infos')))
+//     {
+//         titles.push($caseToggle.getAttribute('infos'))
+//     }
+//     $caseToggle.addEventListener(
+//         'click',
+//         (_e) =>
+//         {
+//             _e.preventDefault()
+//             openCase()
+//             for(let i = 0; i < data.datas.length; i++)
+//             {
+//                 if($caseToggle.getAttribute('infos') == titles[i])
+//                 {
+//                     $projectIdea.innerHTML = data.datas[i].project
+//                     $techno.innerHTML = data.datas[i].techno
+//                     $job.innerHTML = data.datas[i].job
+//                     $description.innerHTML = data.datas[i].description
+//                     $link.setAttribute('href', data.datas[i].link)
+//                 }
+//             }
+//         }
+//     )
+// }
 
-$close.addEventListener(
-    'click',
-    () =>
-    {
-        openCase()
-    }
-)
+// $close.addEventListener(
+//     'click',
+//     () =>
+//     {
+//         openCase()
+//     }
+// )
 
-// Toggle case study function
-const openCase = () =>
-{
-    $caseStudy.classList.toggle('open')
-}
+// // Toggle case study function
+// const openCase = () =>
+// {
+//     $caseStudy.classList.toggle('open')
+// }
 
 // set up our WebGL context and append the canvas to our wrapper
 let curtains = new Curtains({

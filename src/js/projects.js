@@ -26,17 +26,31 @@ export default class Project
     {
         // Create div img
         this.imgDiv = document.createElement('div')
-        this.imgDiv.classList.add('caselink')
         this.imgDiv.classList.add('img')
         this.imgDiv.setAttribute('infos', this.container.dataset.title)
         this.imgDiv.setAttribute('data-vs-id', "image-plane-vs")
         this.imgDiv.setAttribute('data-fs-id', "image-plane-fs")
         this.container.appendChild(this.imgDiv)
 
-        // Create img inside of the div
-        this.img = this.container.querySelector('img')
-        this.container.removeChild(this.img)
-        this.imgDiv.appendChild(this.img)
+        //Create link
+        if (this.container.dataset.link) {
+            this.link = document.createElement('a')
+            this.link.classList.add('caselink')
+            this.link.setAttribute('href', this.container.dataset.link)
+            this.link.setAttribute('target', "_blank")
+            this.imgDiv.appendChild(this.link)
+
+            // Create img inside of the div
+            this.img = this.container.querySelector('img')
+            this.container.removeChild(this.img)
+            this.link.appendChild(this.img)
+        } else {
+            // Create img inside of the div
+            this.img = this.container.querySelector('img')
+            this.container.removeChild(this.img)
+            this.imgDiv.appendChild(this.img)
+        }
+
 
         // Create div for imgHover text inside of the div
         // this.imgTextDiv = document.createElement('div')
@@ -78,13 +92,17 @@ export default class Project
         this.title.innerText = this.container.dataset.text
         this.textDiv.appendChild(this.title)
 
-        // Create link
-        this.link = document.createElement('a')
-        this.link.classList.add('link')
-        this.link.classList.add('caselink')
-        this.link.setAttribute('href', '#')
-        this.link.setAttribute('infos', this.container.dataset.title)
-        this.link.innerText = 'case study'
-        this.textDiv.appendChild(this.link)
+        if(this.container.dataset.link) {
+            // Create link
+            this.link = document.createElement('a')
+            this.link.classList.add('link')
+            this.link.classList.add('caselink')
+            this.link.setAttribute('href', this.container.dataset.link)
+            this.link.setAttribute('target', "_blank")
+            this.link.setAttribute('infos', this.container.dataset.title)
+            this.link.innerText = 'Go to website'
+            this.textDiv.appendChild(this.link)
+        }
+
     }
 }
