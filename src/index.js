@@ -45,7 +45,7 @@ for (const $img of $imgs) {
 //     () =>
 //     {
 //         load = true
-//         window.scrollTo(0, 0);
+//         window.scrollTo(0, 0)
 //     }
 // )
 
@@ -269,7 +269,7 @@ for(const $caseToggle of $caseToggles)
         {
             _e.preventDefault()
             openCase()
-            for(let i = 0;i < data.datas.length;i++)
+            for(let i = 0; i < data.datas.length; i++)
             {
                 if($caseToggle.getAttribute('infos') == titles[i])
                 {
@@ -309,12 +309,12 @@ const createShaders = () => {
     let mousePosition = {
         x: 0,
         y: 0,
-    };
+    }
     // we will keep track of the last position in order to calculate the movement strength/delta
     let mouseLastPosition = {
         x: 0,
         y: 0,
-    };
+    }
     let mouseDelta = 0
 
     // get our plane element
@@ -346,41 +346,43 @@ const createShaders = () => {
 
         // if our plane has been successfully created
         if(planesCurtains[index]) {
-            handleExamples(index)
+            createImagesShaders(index)
         }
     })
 
-    function handleExamples(index) {
-        let plane = planesCurtains[index];
+    function createImagesShaders(index) {
+        let plane = planesCurtains[index]
 
         // if there has been an error during init, plane will be null
         if(plane) {
             plane.onReady(function() {
 
-                plane.mouseOver = false;
+                plane.mouseOver = false
 
                 planeElements[index].addEventListener("mouseenter", function(e) {
-                    plane.mouseOver = true;
-                });
+                    plane.mouseOver = true
+                })
 
                 planeElements[index].addEventListener("mouseleave", function(e) {
-                    plane.mouseOver = false;
-                });
+                    plane.mouseOver = false
+                })
 
             }).onRender(function() {
                 if(plane.mouseOver) {
-                    plane.uniforms.time.value = Math.min(45, plane.uniforms.time.value + 1);
+                    plane.uniforms.time.value = Math.min(45, plane.uniforms.time.value + 1)
                 }
                 else {
-                    plane.uniforms.time.value = Math.max(0, plane.uniforms.time.value - 1);
+                    plane.uniforms.time.value = Math.max(0, plane.uniforms.time.value - 1)
                 }
 
-                plane.updatePosition();
+                plane.updatePosition()
             }).onLeaveView(function() {
-                //console.log("leaving view", plane.index);
+                //console.log("leaving view", plane.index)
             }).onReEnterView(function() {
-                //console.log("entering view", plane.index);
-            });
+                //console.log("entering view", plane.index)
+            })
+        } else {
+            plane.classList.add('no-curtain')
         }
 
     }
@@ -391,55 +393,67 @@ function initCurtains() {
     let mousePosition = {
         x: 0,
         y: 0,
-    };
+    }
     // we will keep track of the last position in order to calculate the movement strength/delta
     let mouseLastPosition = {
         x: 0,
         y: 0,
-    };
-    let mouseDelta = 0;
+    }
+    let mouseDelta = 0
 
     // get our plane element
-    let planeElements = document.getElementsByClassName("curtain");
+    let planeElement = document.querySelector(".curtain")
 
 
     // handling errors
-    // curtains.onError(function() {
-    //     // we will add a class to the document body to display original canvas
-    //     document.body.classList.add("no-curtains");
+    curtains.onError(function() {
+        // we will add a class to the document body to display original canvas
+        $canvas.classList.add('no-curtains')
 
-    //     // handle canvas here
-    //     function animate() {
-    //         // animate our texture canvas
-    //         animateTextureCanvas();
+        // handle canvas here
+        function animate() {
+            // animate our texture canvas
+            animateTextureCanvas()
 
-    //         window.requestAnimationFrame(animate);
-    //     }
+            window.requestAnimationFrame(animate)
+        }
 
-    //     animate();
-    // });
+        animate()
+    })
 
     function animateTextureCanvas() {
         // here we will handle our canvas texture animation
 
         // clear scene
-        simpleCanvasContext.clearRect(0, 0, simpleCanvas.width, simpleCanvas.height);
+        simpleCanvasContext.clearRect(0, 0, simpleCanvas.width, simpleCanvas.height)
 
         // continuously rotate the canvas
-        // simpleCanvasContext.translate(simpleCanvas.width / 2, simpleCanvas.height / 2);
-        // simpleCanvasContext.rotate(Math.PI / 360);
-        // simpleCanvasContext.translate(-simpleCanvas.width / 2, -simpleCanvas.height / 2);
+        // simpleCanvasContext.translate(simpleCanvas.width / 2, simpleCanvas.height / 2)
+        // simpleCanvasContext.rotate(Math.PI / 360)
+        // simpleCanvasContext.translate(-simpleCanvas.width / 2, -simpleCanvas.height / 2)
 
         // draw a red rectangle
-        simpleCanvasContext.fillStyle = "#000";
+        simpleCanvasContext.fillStyle = "#000"
         // simpleCanvasContext.arc(simpleCanvas.width / 2, simpleCanvas.height / 2, simpleCanvas.width / 8, 0, 2 * Math.PI, true)
         // simpleCanvasContext.fill()
-        simpleCanvasContext.fillRect(simpleCanvas.width / 2 - simpleCanvas.width / 8, simpleCanvas.height / 2 - simpleCanvas.height / 8, simpleCanvas.width / 4, simpleCanvas.height / 4);
+        // simpleCanvasContext.fillRect(simpleCanvas.width / 2 - simpleCanvas.width / 8, simpleCanvas.height / 2 - simpleCanvas.height / 8, simpleCanvas.width / 4, simpleCanvas.height / 4)
+        // simpleCanvasContext.fillRect(simpleCanvas.width / 8, simpleCanvas.height / 8, simpleCanvas.width / 4, simpleCanvas.height / 4)
+        // simpleCanvasContext.fillRect(simpleCanvas.width / 2 + simpleCanvas.width / 8, simpleCanvas.height / 2 + simpleCanvas.height / 8, simpleCanvas.width / 4, simpleCanvas.height / 4)
+
+        // Multiple canvas
+        const rectWidth = simpleCanvas.width / 12
+        const rectHeight = simpleCanvas.height / 12
+        for (let i = 0; i < 4;  i++) {
+            simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * i), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
+            simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 2)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
+            simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 4)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
+            simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 6)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
+        }
     }
 
 
     // could be useful to get pixel ratio
-    let pixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1.0;
+    let pixelRatio = window.devicePixelRatio ? window.devicePixelRatio : 1.0
 
     // some basic parameters
     // we don't need to specifiate vertexShaderID and fragmentShaderID because we already passed it via the data attributes of the plane HTML element
@@ -450,7 +464,7 @@ function initCurtains() {
             resolution: { // resolution of our plane
                 name: "uResolution",
                 type: "2f", // notice this is an length 2 array of floats
-                value: [pixelRatio * planeElements[0].clientWidth, pixelRatio * planeElements[0].clientHeight],
+                value: [pixelRatio * planeElement.clientWidth, pixelRatio * planeElement.clientHeight],
             },
             time: { // time uniform that will be updated at each draw call
                 name: "uTime",
@@ -468,68 +482,68 @@ function initCurtains() {
                 value: 0,
             }
         }
-    };
+    }
 
     // create our plane
-    let simplePlane = curtains.addPlane(planeElements[0], params);
+    let simplePlane = curtains.addPlane(planeElement, params)
 
     // i our plane has been successfully created
     if(simplePlane) {
         // our texture canvas
-        var simpleCanvas = document.querySelector(".js-canvas");
-        var simpleCanvasContext = simpleCanvas.getContext("2d");
+        var simpleCanvas = document.querySelector(".js-canvas")
+        var simpleCanvasContext = simpleCanvas.getContext("2d")
 
         // get our plane dimensions
-        let planeBoundingRect = simplePlane.getBoundingRect();
+        let planeBoundingRect = simplePlane.getBoundingRect()
 
         // size our canvas
         // we are dividing it by the pixel ratio value to gain performance
-        simpleCanvas.width = planeBoundingRect.width / curtains.pixelRatio;
-        simpleCanvas.height = planeBoundingRect.height / curtains.pixelRatio;
+        simpleCanvas.width = planeBoundingRect.width / curtains.pixelRatio
+        simpleCanvas.height = planeBoundingRect.height / curtains.pixelRatio
 
         simplePlane.onReady(function() {
             // display the button
-            document.body.classList.add("curtains-ready");
+            document.body.classList.add("curtains-ready")
 
             // set a fov of 35 to exagerate perspective
-            simplePlane.setPerspective(35);
+            simplePlane.setPerspective(35)
 
             // now that our plane is ready we can listen to mouse move event
-            let wrapper = document.querySelector("header");
+            let wrapper = document.querySelector("header")
 
             wrapper.addEventListener("mousemove", function(e) {
-                handleMovement(e, simplePlane);
-            });
+                handleMovement(e, simplePlane)
+            })
 
             wrapper.addEventListener("touchmove", function(e) {
-                handleMovement(e, simplePlane);
-            });
+                handleMovement(e, simplePlane)
+            })
 
             // on resize, update the resolution uniform
             window.addEventListener("resize", function() {
                 // get our plane dimensions
-                let planeBoundingRect = simplePlane.getBoundingRect();
+                let planeBoundingRect = simplePlane.getBoundingRect()
 
-                simplePlane.uniforms.resolution.value = [planeBoundingRect.width * curtains.pixelRatio, planeBoundingRect.height * curtains.pixelRatio];
+                simplePlane.uniforms.resolution.value = [planeBoundingRect.width * curtains.pixelRatio, planeBoundingRect.height * curtains.pixelRatio]
 
                 // size our canvas
                 // we are dividing it by the pixel ratio value to gain performance
-                simpleCanvas.width = planeBoundingRect.width / curtains.pixelRatio;
-                simpleCanvas.height = planeBoundingRect.height / curtains.pixelRatio;
-            });
+                simpleCanvas.width = planeBoundingRect.width / curtains.pixelRatio
+                simpleCanvas.height = planeBoundingRect.height / curtains.pixelRatio
+            })
 
         }).onRender(function() {
             // increment our time uniform
-            simplePlane.uniforms.time.value++;
+            simplePlane.uniforms.time.value++
 
             // send the new mouse move strength value
-            simplePlane.uniforms.mouseMoveStrength.value = mouseDelta;
+            simplePlane.uniforms.mouseMoveStrength.value = mouseDelta
             // decrease the mouse move strenght a bit : if the user doesn't move the mouse, effect will fade away
-            // mouseDelta = Math.max(0, mouseDelta * 0.995);
+            // mouseDelta = Math.max(0, mouseDelta * 0.995)
 
             // animate our texture canvas
-            animateTextureCanvas();
-        });
+            animateTextureCanvas()
+        })
     }
 
     // handle the mouse move event
@@ -537,36 +551,36 @@ function initCurtains() {
 
         if(mousePosition.x != -100000 && mousePosition.y != -100000) {
             // if mouse position is defined, set mouse last position
-            mouseLastPosition.x = mousePosition.x;
-            mouseLastPosition.y = mousePosition.y;
+            mouseLastPosition.x = mousePosition.x
+            mouseLastPosition.y = mousePosition.y
         }
 
         // touch event
         if(e.targetTouches) {
 
-            mousePosition.x = e.targetTouches[0].clientX;
-            mousePosition.y = e.targetTouches[0].clientY;
+            mousePosition.x = e.targetTouches[0].clientX
+            mousePosition.y = e.targetTouches[0].clientY
         }
         // mouse event
         else {
-            mousePosition.x = e.clientX;
-            mousePosition.y = e.clientY;
+            mousePosition.x = e.clientX
+            mousePosition.y = e.clientY
         }
 
         // convert our mouse/touch position to coordinates relative to the vertices of the plane
-        let mouseCoords = plane.mouseToPlaneCoords(mousePosition.x, mousePosition.y);
+        let mouseCoords = plane.mouseToPlaneCoords(mousePosition.x, mousePosition.y)
         // update our mouse position uniform
-        plane.uniforms.mousePosition.value = [mouseCoords.x, mouseCoords.y];
+        plane.uniforms.mousePosition.value = [mouseCoords.x, mouseCoords.y]
 
         // calculate the mouse move strength
         if(mouseLastPosition.x && mouseLastPosition.y) {
-            let delta = Math.sqrt(Math.pow(mousePosition.x - mouseLastPosition.x, 2) + Math.pow(mousePosition.y - mouseLastPosition.y, 2)) / 30;
-            delta = Math.min(4, delta);
+            let delta = Math.sqrt(Math.pow(mousePosition.x - mouseLastPosition.x, 2) + Math.pow(mousePosition.y - mouseLastPosition.y, 2)) / 30
+            delta = Math.min(4, delta)
             // update mouseDelta only if it increased
             if(delta >= mouseDelta) {
-                mouseDelta = delta;
+                mouseDelta = delta
                 // reset our time uniform
-                plane.uniforms.time.value = 0;
+                plane.uniforms.time.value = 0
             }
         }
     }
