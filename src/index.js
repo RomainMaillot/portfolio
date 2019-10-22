@@ -17,9 +17,9 @@ if(module.hot)
 }
 
 // Create dom
-const $projects = document.querySelectorAll('.js-project')
 const $body = document.querySelector('body')
-const $imgs = document.querySelectorAll('img')
+const $projects = $body.querySelectorAll('.js-project')
+const $imgs = $body.querySelectorAll('img')
 const imgsLoad = []
 let index = 0, load = false
 
@@ -28,6 +28,7 @@ for (const $img of $imgs) {
     $img.addEventListener('load',() => {
         imgsLoad.push($img)
         if ((imgsLoad.length + 1) === $imgs.length) {
+            load = true
             createShaders()
             initCurtains()
             $content.classList.add('appear')
@@ -53,11 +54,11 @@ for(const $project of $projects)
 }
 
 // Canvas
-const $header = document.querySelector('header')
-const $canvas = document.querySelector('canvas')
+const $header = $body.querySelector('header')
+const $canvas = $body.querySelector('canvas')
 const context = $canvas.getContext('2d')
-const $content = document.querySelector('.content')
-const $aside = document.querySelector('.aside')
+const $content = $body.querySelector('.content')
+const $aside = $body.querySelector('.aside')
 
 // Resize
 let windowWidth = $canvas.width
@@ -77,7 +78,7 @@ resize()
 
 // Cursor
 const cursor = {}
-const $mouse = document.querySelector('.mouse')
+const $mouse = $body.querySelector('.mouse')
 let mouseIsHover = false
 let rect = []
 
@@ -106,8 +107,8 @@ window.addEventListener(
 
 // Circle animation on canvas
 // let posX = 0, posY = 0, arc1 = 0, arc2 = 1*Math.PI, arc3 = 0.5 * Math.PI, arc4 = 1.5 * Math.PI, radius = 0,end = false, circleWidth = $canvas.width*20/100, ratio = $canvas.width/50
-// const $content = document.querySelector('.content')
-// const $aside = document.querySelector('.aside')
+// const $content = $body.querySelector('.content')
+// const $aside = $body.querySelector('.aside')
 // console.log(ratio)
 
 // const moveCircle = () =>
@@ -152,9 +153,12 @@ window.addEventListener(
 //     }
 //     if (radius > circleWidth) 
 //     {
+//         $canvas.classList.remove('visible')
 //         $content.classList.add('appear')
 //         $aside.classList.add('appear')
 //         $body.classList.add('appear')
+//         createShaders()
+//         initCurtains()
 //     }
 //     // $imgs[2].addEventListener(
 //     //     'load',
@@ -166,7 +170,7 @@ window.addEventListener(
 // }
 // moveCircle()
 
-// // Animation
+// Animation
 // const loop = () =>
 // {
 //     moveCircle()
@@ -194,7 +198,7 @@ window.addEventListener(
 // }
 
 // Hover
-const $nav = document.querySelectorAll('.aside li')
+const $nav = $body.querySelectorAll('.aside li')
 
 
 // for(const $item of $nav)
@@ -205,7 +209,7 @@ const $nav = document.querySelectorAll('.aside li')
 // Reset active
 const resetActive = () =>
 {
-    let $actives = document.querySelectorAll('.active')
+    let $actives = $body.querySelectorAll('.active')
     for(const $active of $actives)
     {
         $active.classList.remove('active')
@@ -217,11 +221,11 @@ window.addEventListener(
     'scroll',
     (_e) =>
     {
-        const $work = document.querySelector('#work')
-        const $workMenu = document.querySelector('.work')
-        const $contact = document.querySelector('#contact')
-        const $contactMenu = document.querySelector('.contact')
-        const $aboutMenu = document.querySelector('.about')
+        const $work = $body.querySelector('#work')
+        const $workMenu = $body.querySelector('.work')
+        const $contact = $body.querySelector('#contact')
+        const $contactMenu = $body.querySelector('.contact')
+        const $aboutMenu = $body.querySelector('.about')
         const workTop = $work.getBoundingClientRect().top - 500
         const contactTop = $contact.getBoundingClientRect().top - 1000
 
@@ -244,14 +248,14 @@ window.addEventListener(
 )
 
 // Toggle case study
-// const $caseToggles = document.querySelectorAll('.caselink')
-// const $caseStudy = document.querySelector('.casestudy')
-// const $close = document.querySelector('.close')
-// const $projectIdea = document.querySelector('.project_idea')
-// const $techno = document.querySelector('.techno')
-// const $job = document.querySelector('.job')
-// const $description = document.querySelector('.description')
-// const $link = document.querySelector('.project_link')
+// const $caseToggles = $body.querySelectorAll('.caselink')
+// const $caseStudy = $body.querySelector('.casestudy')
+// const $close = $body.querySelector('.close')
+// const $projectIdea = $body.querySelector('.project_idea')
+// const $techno = $body.querySelector('.techno')
+// const $job = $body.querySelector('.job')
+// const $description = $body.querySelector('.description')
+// const $link = $body.querySelector('.project_link')
 // const titles = []
 
 // for(const $caseToggle of $caseToggles)
@@ -315,7 +319,7 @@ const createShaders = () => {
     let mouseDelta = 0
 
     // get our plane element
-    let planeElements = document.querySelectorAll(".img")
+    let planeElements = $body.querySelectorAll(".img")
     let planesCurtains = []
 
     // could be useful to get pixel ratio
@@ -399,12 +403,12 @@ function initCurtains() {
     let mouseDelta = 0
 
     // get our plane element
-    let planeElement = document.querySelector(".curtain")
+    let planeElement = $body.querySelector(".curtain")
 
 
     // handling errors
     curtains.onError(function() {
-        // we will add a class to the document body to display original canvas
+        // we will add a class to the $body body to display original canvas
         $canvas.classList.add('no-curtains')
 
         // handle canvas here
@@ -418,6 +422,16 @@ function initCurtains() {
         animate()
     })
 
+    function getColor() {
+        let letters = '0123456789ABCDEF'
+        let color = '#'
+        for (let i = 0; i < 6; i++) {
+        //   color += letters[Math.floor(Math.random() * 16)]
+            color += letters[Math.floor((mousePosition.x / windowWidth) * 13)]
+        }
+        return color
+    }
+
     function animateTextureCanvas() {
         // here we will handle our canvas texture animation
 
@@ -430,6 +444,7 @@ function initCurtains() {
         // simpleCanvasContext.translate(-simpleCanvas.width / 2, -simpleCanvas.height / 2)
 
         // draw a red rectangle
+        // simpleCanvasContext.fillStyle = getColor()
         simpleCanvasContext.fillStyle = "#000"
         // simpleCanvasContext.arc(simpleCanvas.width / 2, simpleCanvas.height / 2, simpleCanvas.width / 8, 0, 2 * Math.PI, true)
         // simpleCanvasContext.fill()
@@ -487,8 +502,8 @@ function initCurtains() {
     // i our plane has been successfully created
     if(simplePlane) {
         // our texture canvas
-        var simpleCanvas = document.querySelector(".js-canvas")
-        var simpleCanvasContext = simpleCanvas.getContext("2d")
+        var simpleCanvas = $canvas
+        var simpleCanvasContext = context
 
         // get our plane dimensions
         let planeBoundingRect = simplePlane.getBoundingRect()
@@ -500,13 +515,13 @@ function initCurtains() {
 
         simplePlane.onReady(function() {
             // display the button
-            document.body.classList.add("curtains-ready")
+            $body.classList.add("curtains-ready")
 
             // set a fov of 35 to exagerate perspective
             simplePlane.setPerspective(35)
 
             // now that our plane is ready we can listen to mouse move event
-            let wrapper = document.querySelector("header")
+            let wrapper = $body.querySelector("header")
 
             wrapper.addEventListener("mousemove", function(e) {
                 handleMovement(e, simplePlane)
