@@ -22,8 +22,10 @@ const $projects = $body.querySelectorAll('.js-project')
 const $imgs = $body.querySelectorAll('img')
 const imgsLoad = []
 let index = 0, load = false
-const $test = $body.querySelector('.test')
-const $loader = $test.querySelector('.loading .loader')
+const $loadingContainer = $body.querySelector('.loading-container')
+const $loading = $body.querySelector('.loading')
+const $loader = $loadingContainer.querySelector('.loading .loader')
+const $moveCanvas = $body.querySelector('.curtain')
 
 // Check if all images are load
 for (const $img of $imgs) {
@@ -35,7 +37,12 @@ for (const $img of $imgs) {
             load = true
             createShaders()
             initCurtains()
-            $test.classList.remove('visible')
+            $loading.classList.add('leave')
+            $loader.style.transform = `scaleX(0)`
+            $loader.style.transition = 'transform 1s ease-in-out'
+            $loader.style.delay = '1s'
+            $loadingContainer.classList.remove('visible')
+            $moveCanvas.classList.add('appear')
             setTimeout(() => {
                 $content.classList.add('appear')
                 $aside.classList.add('appear')
@@ -434,7 +441,6 @@ function initCurtains() {
         let color = '#'
         for (let i = 0; i < 6; i++) {
           color += letters[Math.floor(Math.random() * 16)]
-            // color += letters[Math.floor((mousePosition.x / windowWidth) * 13)]
         }
         return color
     }
@@ -449,7 +455,7 @@ function initCurtains() {
 
         // clear scene
         simpleCanvasContext.clearRect(0, 0, simpleCanvas.width, simpleCanvas.height)
-        const randomValues = [50, 400, 600, 1000]
+        const randomValues = [50, 200, 300, 600]
 
         // continuously rotate the canvas
         // simpleCanvasContext.translate(simpleCanvas.width / 2, simpleCanvas.height / 2)
@@ -477,28 +483,47 @@ function initCurtains() {
             // simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 6)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
 
             // Create chessplate
-            if (i % 2 === 0) {
+            // if (i % 2 === 0) {
             //     simpleCanvasContext.fillRect(0, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 2, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 4, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 6, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 8, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 10, rectHeight * i, rectWidth, rectHeight)
-                    simpleCanvasContext.beginPath()
-                    simpleCanvasContext.moveTo(-100, randomValues[i])
-                    simpleCanvasContext.lineTo(windowWidth, windowHeight + randomValues[i])
-                    simpleCanvasContext.stroke()
-            } else {
+            // } else {
             //     simpleCanvasContext.fillRect(rectWidth, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 3, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 5, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 7, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 9, rectHeight * i, rectWidth, rectHeight)
             //     simpleCanvasContext.fillRect(rectWidth * 11, rectHeight * i, rectWidth, rectHeight)
+            // }
+            switch (i) {
+                case 0:
                     simpleCanvasContext.beginPath()
-                    simpleCanvasContext.moveTo(randomValues[i], -100)
-                    simpleCanvasContext.lineTo((windowWidth + randomValues[i]) - 500, windowHeight - 500)
+                    simpleCanvasContext.moveTo(0, windowHeight / 5)
+                    simpleCanvasContext.lineTo(windowWidth - (windowWidth / 2.5), windowHeight - (windowHeight / 5))
                     simpleCanvasContext.stroke()
+                    break;
+                case 1:
+                    simpleCanvasContext.beginPath()
+                    simpleCanvasContext.moveTo(0, 0)
+                    simpleCanvasContext.lineTo(windowWidth - (windowWidth / 8), windowHeight - (windowHeight / 8))
+                    simpleCanvasContext.stroke()
+                    break;
+                case 2:
+                    simpleCanvasContext.beginPath()
+                    simpleCanvasContext.moveTo(0, -(windowHeight / 5))
+                    simpleCanvasContext.lineTo(windowWidth - (windowWidth / 3), windowHeight - (windowHeight / 1.5))
+                    simpleCanvasContext.stroke()
+                    break;
+                case 3:
+                    simpleCanvasContext.beginPath()
+                    simpleCanvasContext.moveTo(0, -(windowHeight / 3))
+                    simpleCanvasContext.lineTo(windowWidth - (windowWidth / 12), windowHeight - (windowHeight / 1.5))
+                    simpleCanvasContext.stroke()
+                    break;
+            
             }
 
             // create line
