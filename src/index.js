@@ -31,23 +31,22 @@ const $moveCanvas = $body.querySelector('.curtain')
 for (const $img of $imgs) {
     $img.addEventListener('load',() => {
         imgsLoad.push($img)
-        $loader.style.transform = `scaleX(${(imgsLoad.length + 1) / $imgs.length})`
+        $loader.style.transform = `scaleX(${(imgsLoad.length + 2) / $imgs.length})`
         $loader.style.transition = 'transform 0.3s ease-in-out'
         if ((imgsLoad.length + 1) / $imgs.length === 1) {
             load = true
             createShaders()
             initCurtains()
             $loading.classList.add('leave')
-            $loader.style.transform = `scaleX(0)`
-            $loader.style.transition = 'transform 1s ease-in-out'
-            $loader.style.delay = '1s'
             $loadingContainer.classList.remove('visible')
             $moveCanvas.classList.add('appear')
+            $loader.style.transition = 'transform 1.5s ease-in-out'
+            $loader.style.transform = `scaleX(0)`
             setTimeout(() => {
                 $content.classList.add('appear')
                 $aside.classList.add('appear')
                 $body.classList.add('appear')
-            }, 3000);
+            }, 2000);
         }
     })
 }
@@ -56,7 +55,6 @@ for (const $img of $imgs) {
 //     'load',
 //     () =>
 //     {
-//         load = true
 //         window.scrollTo(0, 0)
 //     }
 // )
@@ -442,6 +440,7 @@ function initCurtains() {
         for (let i = 0; i < 6; i++) {
           color += letters[Math.floor(Math.random() * 16)]
         }
+        color += '80'
         return color
     }
 
@@ -455,7 +454,7 @@ function initCurtains() {
 
         // clear scene
         simpleCanvasContext.clearRect(0, 0, simpleCanvas.width, simpleCanvas.height)
-        const randomValues = [50, 200, 300, 600]
+        // const randomValues = [50, 200, 300, 600]
 
         // continuously rotate the canvas
         // simpleCanvasContext.translate(simpleCanvas.width / 2, simpleCanvas.height / 2)
