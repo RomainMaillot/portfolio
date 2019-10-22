@@ -22,18 +22,25 @@ const $projects = $body.querySelectorAll('.js-project')
 const $imgs = $body.querySelectorAll('img')
 const imgsLoad = []
 let index = 0, load = false
+const $test = $body.querySelector('.test')
+const $loader = $test.querySelector('.loading .loader')
 
 // Check if all images are load
 for (const $img of $imgs) {
     $img.addEventListener('load',() => {
         imgsLoad.push($img)
+        $loader.style.transform = `scaleX(${imgsLoad.length / $imgs.length})`
+        $loader.style.transition = 'transform 0.3s ease-in-out'
         if ((imgsLoad.length + 1) === $imgs.length) {
             load = true
             createShaders()
             initCurtains()
-            $content.classList.add('appear')
-            $aside.classList.add('appear')
-            $body.classList.add('appear')
+            $test.classList.remove('visible')
+            setTimeout(() => {
+                $content.classList.add('appear')
+                $aside.classList.add('appear')
+                $body.classList.add('appear')
+            }, 3000);
         }
     })
 }

@@ -35,6 +35,37 @@ html
 body
     overflow-x hidden
     overflow-y hidden
+    .test
+        position absolute
+        top 0
+        bottom 0
+        left 0
+        right 0
+        background $purple
+        z-index 20
+        transition transform 3s
+        transition-delay 1s
+        transform translateY(-100%)
+        display flex
+        justify-content center
+        align-items center
+        &.visible
+            transform translateY(0)
+        .loading
+            position relative
+            .text
+                font-size 3rem
+                color white
+                font-family $font-family
+            .loader
+                position absolute
+                background-color #FFFFFF
+                top 110%
+                left 0
+                height 2px
+                width 100%
+                transform scaleX(0)
+                transform-origin left
     #canvas
         position fixed
         top 0
