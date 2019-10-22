@@ -29,9 +29,9 @@ const $loader = $test.querySelector('.loading .loader')
 for (const $img of $imgs) {
     $img.addEventListener('load',() => {
         imgsLoad.push($img)
-        $loader.style.transform = `scaleX(${imgsLoad.length / $imgs.length})`
+        $loader.style.transform = `scaleX(${(imgsLoad.length + 1) / $imgs.length})`
         $loader.style.transition = 'transform 0.3s ease-in-out'
-        if ((imgsLoad.length + 1) === $imgs.length) {
+        if ((imgsLoad.length + 1) / $imgs.length === 1) {
             load = true
             createShaders()
             initCurtains()
@@ -433,10 +433,15 @@ function initCurtains() {
         let letters = '0123456789ABCDEF'
         let color = '#'
         for (let i = 0; i < 6; i++) {
-        //   color += letters[Math.floor(Math.random() * 16)]
-            color += letters[Math.floor((mousePosition.x / windowWidth) * 13)]
+          color += letters[Math.floor(Math.random() * 16)]
+            // color += letters[Math.floor((mousePosition.x / windowWidth) * 13)]
         }
         return color
+    }
+
+    const colors = []
+    for (let index = 0; index < 10; index++) {
+        colors.push(getColor())
     }
 
     function animateTextureCanvas() {
@@ -444,6 +449,7 @@ function initCurtains() {
 
         // clear scene
         simpleCanvasContext.clearRect(0, 0, simpleCanvas.width, simpleCanvas.height)
+        const randomValues = [50, 400, 600, 1000]
 
         // continuously rotate the canvas
         // simpleCanvasContext.translate(simpleCanvas.width / 2, simpleCanvas.height / 2)
@@ -452,7 +458,6 @@ function initCurtains() {
 
         // draw a red rectangle
         // simpleCanvasContext.fillStyle = getColor()
-        simpleCanvasContext.fillStyle = "#000"
         // simpleCanvasContext.arc(simpleCanvas.width / 2, simpleCanvas.height / 2, simpleCanvas.width / 8, 0, 2 * Math.PI, true)
         // simpleCanvasContext.fill()
         // simpleCanvasContext.fillRect(simpleCanvas.width / 2 - simpleCanvas.width / 8, simpleCanvas.height / 2 - simpleCanvas.height / 8, simpleCanvas.width / 4, simpleCanvas.height / 4)
@@ -460,13 +465,47 @@ function initCurtains() {
         // simpleCanvasContext.fillRect(simpleCanvas.width / 2 + simpleCanvas.width / 8, simpleCanvas.height / 2 + simpleCanvas.height / 8, simpleCanvas.width / 4, simpleCanvas.height / 4)
 
         // Multiple canvas
-        const rectWidth = simpleCanvas.width / 12
-        const rectHeight = simpleCanvas.height / 12
+        // Rectangle width
+        // const rectWidth = simpleCanvas.width / 12
+        // const rectHeight = simpleCanvas.height / 12
         for (let i = 0; i < 4;  i++) {
-            simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * i), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
-            simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 2)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
-            simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 4)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
-            simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 6)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
+            simpleCanvasContext.strokeStyle = colors[i]
+            simpleCanvasContext.lineWidth = 50
+            // simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * i), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
+            // simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 2)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
+            // simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 4)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
+            // simpleCanvasContext.fillRect(simpleCanvas.width / 12 + (rectWidth * (i + 6)), simpleCanvas.height / 8 + (rectHeight * i), rectWidth, rectHeight)
+
+            // Create chessplate
+            if (i % 2 === 0) {
+            //     simpleCanvasContext.fillRect(0, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 2, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 4, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 6, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 8, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 10, rectHeight * i, rectWidth, rectHeight)
+                    simpleCanvasContext.beginPath()
+                    simpleCanvasContext.moveTo(-100, randomValues[i])
+                    simpleCanvasContext.lineTo(windowWidth, windowHeight + randomValues[i])
+                    simpleCanvasContext.stroke()
+            } else {
+            //     simpleCanvasContext.fillRect(rectWidth, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 3, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 5, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 7, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 9, rectHeight * i, rectWidth, rectHeight)
+            //     simpleCanvasContext.fillRect(rectWidth * 11, rectHeight * i, rectWidth, rectHeight)
+                    simpleCanvasContext.beginPath()
+                    simpleCanvasContext.moveTo(randomValues[i], -100)
+                    simpleCanvasContext.lineTo((windowWidth + randomValues[i]) - 500, windowHeight - 500)
+                    simpleCanvasContext.stroke()
+            }
+
+            // create line
+            // simpleCanvasContext.beginPath()
+            // simpleCanvasContext.moveTo(-10, randomValues[i])
+            // simpleCanvasContext.lineTo(windowWidth, windowHeight)
+            // simpleCanvasContext.stroke()
         }
     }
 
