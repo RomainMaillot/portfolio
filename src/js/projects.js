@@ -10,7 +10,7 @@ export default class Project
 
     createElement()
     {
-        if(this.container.dataset.position === 'right')
+        if(this.index % 2 === 0)
         {
             this.createContentDiv()
             this.createImgDiv()
