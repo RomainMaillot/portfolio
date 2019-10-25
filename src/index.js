@@ -5,6 +5,8 @@ import * as data from './js/infos.json'
 
 import {Curtains} from 'curtainsjs'
 
+window.scrollTo(0, 0)
+
 // Hot reload
 if(module.hot)
 {

@@ -261,17 +261,17 @@ main
         display flex
         flex-direction row
         justify-content space-between
-        margin 10vw 5vw 10vw 10vw
+        margin 20vw 5vw 20vw 10vw
         overflow visible
-        transition all 0.5s ease-in
-        opacity 0
+        transition all 0.5s ease-in-out
         &.right
             transform translateX(50%)
         &.left
             transform translateX(-50%)
         &.appear
             transform translateX(0)
-            opacity 1
+            .content
+                opacity 1
         .img
             width 50%
             height 100%
@@ -320,6 +320,9 @@ main
             display flex
             flex-direction: column
             width 40%
+            transition all 0.5s ease-in-out
+            transition-delay 0.5s
+            opacity 0
             h3
                 font-size 6rem
                 font-family $font-family
