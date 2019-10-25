@@ -36,7 +36,7 @@ for (const $img of $imgs) {
     $img.addEventListener('load',() => {
         imgsLoad.push($img)
         $loader.style.transform = `scaleX(${(imgsLoad.length + 2) / $imgs.length})`
-        if ((imgsLoad.length + 1) / $imgs.length === 1 && width > 1024) {
+        if ((imgsLoad.length + 1) / $imgs.length === 1 && width >= 1024) {
             createShaders()
             initCurtains()
             setTimeout(() => {
@@ -51,7 +51,7 @@ for (const $img of $imgs) {
                 $aside.classList.add('appear')
                 $body.classList.add('appear')
             }, 2000)
-        } else if ((imgsLoad.length + 1) / $imgs.length === 1 && width <= 1024) {
+        } else if ((imgsLoad.length + 1) / $imgs.length === 1 && width < 1024) {
             initCurtains()
             setTimeout(() => {
                 $loading.classList.add('leave')
@@ -276,7 +276,14 @@ window.addEventListener(
         }
 
         for(const $project of $projects) {
-            const projectTop = width > 1024 ? $project.getBoundingClientRect().top - 500 : $project.getBoundingClientRect().top - 700
+            let projectTop
+            if (width > 1024) {
+                projectTop = $project.getBoundingClientRect().top - 500
+            } else if (width <= 768 && width > 480) {
+                projectTop = $project.getBoundingClientRect().top - 1500
+            } else {
+                projectTop = $project.getBoundingClientRect().top - 700
+            }
             if (projectTop < 0) {
                 $project.classList.add('appear')
             }

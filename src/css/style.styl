@@ -267,11 +267,11 @@ main
         transition all 0.5s ease-in-out
         &.right
             transform translateX(50%)
-            @media all and (max-width: $littleScreen)
+            @media all and (max-width: $mediumScreen)
                 transform translateX(100%)
         &.left
             transform translateX(-50%)
-            @media all and (max-width: $littleScreen)
+            @media all and (max-width: $mediumScreen)
                 transform translateX(-150%)
         &.appear
             transform translateX(0)
@@ -293,7 +293,7 @@ main
                 opacity 0
                 &.no-curtain
                     opacity 1
-                @media all and (max-width: $littleScreen)
+                @media all and (max-width: $mediumScreen)
                     opacity 1
             // &::after
             //     content ""
