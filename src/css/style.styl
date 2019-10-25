@@ -263,6 +263,15 @@ main
         justify-content space-between
         margin 10vw 5vw 10vw 10vw
         overflow visible
+        transition all 0.5s ease-in
+        opacity 0
+        &.right
+            transform translateX(50%)
+        &.left
+            transform translateX(-50%)
+        &.appear
+            transform translateX(0)
+            opacity 1
         .img
             width 50%
             height 100%
@@ -327,7 +336,7 @@ main
                     opacity 0.5
                     z-index -1
             .text
-                width 86%
+                width 95%
                 margin-top 5vh
                 position relative
                 h2

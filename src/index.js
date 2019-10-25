@@ -256,6 +256,13 @@ window.addEventListener(
             resetActive()
             $aboutMenu.classList.add('active')
         }
+
+        for(const $project of $projects) {
+            const projectTop = $project.getBoundingClientRect().top - 500
+            if (projectTop < 0) {
+                $project.classList.add('appear')
+            }
+        }
     }
 )
 
