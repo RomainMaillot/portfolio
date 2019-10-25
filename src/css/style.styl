@@ -66,7 +66,7 @@ body
                 transform translateY(-100%)
                 transition transform 1s ease-in
             .text
-                font-size 5rem
+                font-size 3rem
                 color white
                 font-family $font-family
             .loader
@@ -139,14 +139,14 @@ body
     nav
         height 20%
         position relative
-        &::after
-            content ""
-            height 200%
-            width 1px
-            position absolute
-            right -50%
-            top -50%
-            background $grey
+        // &::after
+        //     content ""
+        //     height 200%
+        //     width 1px
+        //     position absolute
+        //     right -50%
+        //     top -50%
+        //     background $grey
         ul
             height 100%
             display flex
@@ -220,6 +220,7 @@ header
             font-weight bold
             font-size 3.5rem
             text-align left
+            margin-bottom 10px
         .text
             color $grey
             font $text
@@ -227,6 +228,7 @@ header
             flex-direction row
             justify-content flex-start
             flex-wrap wrap
+            width 80%
             h1, h2
                 font $text
             a
@@ -326,7 +328,6 @@ main
                     z-index -1
             .text
                 width 86%
-                padding-left 5vw
                 margin-top 5vh
                 position relative
                 h2
@@ -457,7 +458,7 @@ footer
         bottom 0
         left 0
         background-color $purple
-        transform scaleX(0)
+        transform scaleX(0.2)
         transform-origin left
         transition transform 0.3s
         will-change transform
