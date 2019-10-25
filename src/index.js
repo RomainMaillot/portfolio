@@ -21,7 +21,7 @@ const $body = document.querySelector('body')
 const $projects = $body.querySelectorAll('.js-project')
 const $imgs = $body.querySelectorAll('img')
 const imgsLoad = []
-let index = 0, load = false
+let index = 0
 const $loadingContainer = $body.querySelector('.loading-container')
 const $loading = $body.querySelector('.loading')
 const $loader = $loadingContainer.querySelector('.loading .loader')
@@ -34,7 +34,6 @@ for (const $img of $imgs) {
         $loader.style.transform = `scaleX(${(imgsLoad.length + 2) / $imgs.length})`
         $loader.style.transition = 'transform 0.3s ease-in-out'
         if ((imgsLoad.length + 1) / $imgs.length === 1) {
-            load = true
             createShaders()
             initCurtains()
             $loading.classList.add('leave')
@@ -513,13 +512,13 @@ function initCurtains() {
                 case 2:
                     simpleCanvasContext.beginPath()
                     simpleCanvasContext.moveTo(0, -(windowHeight / 5))
-                    simpleCanvasContext.lineTo(windowWidth - (windowWidth / 3), windowHeight - (windowHeight / 1.5))
+                    simpleCanvasContext.lineTo(windowWidth - (windowWidth / 3), windowHeight - (windowHeight / 1.8))
                     simpleCanvasContext.stroke()
                     break;
                 case 3:
                     simpleCanvasContext.beginPath()
                     simpleCanvasContext.moveTo(0, -(windowHeight / 3))
-                    simpleCanvasContext.lineTo(windowWidth - (windowWidth / 12), windowHeight - (windowHeight / 1.5))
+                    simpleCanvasContext.lineTo(windowWidth - (windowWidth / 12), windowHeight - (windowHeight / 1.8))
                     simpleCanvasContext.stroke()
                     break;
             
