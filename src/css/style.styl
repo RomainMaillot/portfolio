@@ -266,8 +266,12 @@ main
         transition all 0.5s ease-in-out
         &.right
             transform translateX(50%)
+            @media all and (max-width: $littleScreen)
+                transform translateX(100%)
         &.left
             transform translateX(-50%)
+            @media all and (max-width: $littleScreen)
+                transform translateX(-100%)
         &.appear
             transform translateX(0)
             .content
@@ -287,6 +291,8 @@ main
                 width 100%
                 opacity 0
                 &.no-curtain
+                    opacity 1
+                @media all and (max-width: $littleScreen)
                     opacity 1
             // &::after
             //     content ""
@@ -342,12 +348,17 @@ main
                 width 95%
                 margin-top 5vh
                 position relative
+                @media all and (max-width: $littleScreen)
+                    margin-top 2vh
                 h2
                     font $title
                     font-weight 600
                 p
                     font $text
                     padding-top 2vh
+                    @media all and (max-width: $littleScreen)
+                        line-height 20px
+                        font-size 15px
                 a
                     color black
                     text-decoration none

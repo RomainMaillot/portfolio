@@ -28,13 +28,15 @@ const $loadingContainer = $body.querySelector('.loading-container')
 const $loading = $body.querySelector('.loading')
 const $loader = $loadingContainer.querySelector('.loading .loader')
 const $moveCanvas = $body.querySelector('.curtain')
+let width = (window.innerWidth > 0) ? window.innerWidth : document.documentElement.clientWidth
+console.log("TCL: width", width)
 
 // Check if all images are load
 for (const $img of $imgs) {
     $img.addEventListener('load',() => {
         imgsLoad.push($img)
         $loader.style.transform = `scaleX(${(imgsLoad.length + 2) / $imgs.length})`
-        if ((imgsLoad.length + 1) / $imgs.length === 1) {
+        if ((imgsLoad.length + 1) / $imgs.length === 1 && width > 1024) {
             createShaders()
             initCurtains()
             setTimeout(() => {
@@ -43,12 +45,26 @@ for (const $img of $imgs) {
                 $moveCanvas.classList.add('appear')
                 $loader.classList.add('disapear')
                 $loader.style.transform = `scaleX(0)`
-            }, 500);
+            }, 500)
             setTimeout(() => {
                 $content.classList.add('appear')
                 $aside.classList.add('appear')
                 $body.classList.add('appear')
-            }, 2000);
+            }, 2000)
+        } else if ((imgsLoad.length + 1) / $imgs.length === 1 && width <= 1024) {
+            initCurtains()
+            setTimeout(() => {
+                $loading.classList.add('leave')
+                $loadingContainer.classList.add('disapear')
+                $moveCanvas.classList.add('appear')
+                $loader.classList.add('disapear')
+                $loader.style.transform = `scaleX(0)`
+            }, 500)
+            setTimeout(() => {
+                $content.classList.add('appear')
+                $aside.classList.add('appear')
+                $body.classList.add('appear')
+            }, 2000)
         }
     })
 }
@@ -260,7 +276,7 @@ window.addEventListener(
         }
 
         for(const $project of $projects) {
-            const projectTop = $project.getBoundingClientRect().top - 500
+            const projectTop = width > 1024 ? $project.getBoundingClientRect().top - 500 : $project.getBoundingClientRect().top - 1000
             if (projectTop < 0) {
                 $project.classList.add('appear')
             }
