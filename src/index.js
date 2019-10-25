@@ -276,7 +276,7 @@ window.addEventListener(
         }
 
         for(const $project of $projects) {
-            const projectTop = width > 1024 ? $project.getBoundingClientRect().top - 500 : $project.getBoundingClientRect().top - 1000
+            const projectTop = width > 1024 ? $project.getBoundingClientRect().top - 500 : $project.getBoundingClientRect().top - 700
             if (projectTop < 0) {
                 $project.classList.add('appear')
             }
