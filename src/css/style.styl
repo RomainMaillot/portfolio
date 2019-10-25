@@ -47,6 +47,8 @@ body
         display flex
         justify-content center
         align-items center
+        &.disapear
+            transform translateY(-100%)
         &.disapear::before
             transform translateY(-100%)
         &::before
@@ -75,6 +77,9 @@ body
                 height 2px
                 transform scaleX(0)
                 transform-origin left
+                transition transform 0.3s ease-in-out
+                &.disapear
+                    transition transform 1.5s ease-in-out
     #canvas
         position fixed
         top 0

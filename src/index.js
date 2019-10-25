@@ -32,14 +32,13 @@ for (const $img of $imgs) {
     $img.addEventListener('load',() => {
         imgsLoad.push($img)
         $loader.style.transform = `scaleX(${(imgsLoad.length + 2) / $imgs.length})`
-        $loader.style.transition = 'transform 0.3s ease-in-out'
         if ((imgsLoad.length + 1) / $imgs.length === 1) {
             createShaders()
             initCurtains()
             $loading.classList.add('leave')
             $loadingContainer.classList.add('disapear')
             $moveCanvas.classList.add('appear')
-            $loader.style.transition = 'transform 1.5s ease-in-out'
+            $loader.classList.add('disapear')
             $loader.style.transform = `scaleX(0)`
             setTimeout(() => {
                 $content.classList.add('appear')
