@@ -37,7 +37,7 @@ for (const $img of $imgs) {
             createShaders()
             initCurtains()
             $loading.classList.add('leave')
-            $loadingContainer.classList.remove('visible')
+            $loadingContainer.classList.add('disapear')
             $moveCanvas.classList.add('appear')
             $loader.style.transition = 'transform 1.5s ease-in-out'
             $loader.style.transform = `scaleX(0)`
