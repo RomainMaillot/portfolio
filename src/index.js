@@ -35,11 +35,13 @@ for (const $img of $imgs) {
         if ((imgsLoad.length + 1) / $imgs.length === 1) {
             createShaders()
             initCurtains()
-            $loading.classList.add('leave')
-            $loadingContainer.classList.add('disapear')
-            $moveCanvas.classList.add('appear')
-            $loader.classList.add('disapear')
-            $loader.style.transform = `scaleX(0)`
+            setTimeout(() => {
+                $loading.classList.add('leave')
+                $loadingContainer.classList.add('disapear')
+                $moveCanvas.classList.add('appear')
+                $loader.classList.add('disapear')
+                $loader.style.transform = `scaleX(0)`
+            }, 500);
             setTimeout(() => {
                 $content.classList.add('appear')
                 $aside.classList.add('appear')
