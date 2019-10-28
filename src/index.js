@@ -5,8 +5,6 @@ import * as data from './js/infos.json'
 
 import {Curtains} from 'curtainsjs'
 
-window.scrollTo(0, 0)
-
 // Hot reload
 if(module.hot)
 {
@@ -29,7 +27,7 @@ const $loading = $body.querySelector('.loading')
 const $loader = $loadingContainer.querySelector('.loading .loader')
 const $moveCanvas = $body.querySelector('.curtain')
 let width = (window.innerWidth > 0) ? window.innerWidth : document.documentElement.clientWidth
-console.log("TCL: width", width)
+
 
 // Check if all images are load
 for (const $img of $imgs) {
@@ -39,7 +37,8 @@ for (const $img of $imgs) {
         if ((imgsLoad.length + 1) / $imgs.length === 1 && width >= 1024) {
             createShaders()
             initCurtains()
-            setTimeout(() => {
+            setTimeout(() => {     
+                window.scrollTo(0, 0)
                 $loading.classList.add('leave')
                 $loadingContainer.classList.add('disapear')
                 $moveCanvas.classList.add('appear')
@@ -54,6 +53,7 @@ for (const $img of $imgs) {
         } else if ((imgsLoad.length + 1) / $imgs.length === 1 && width < 1024) {
             initCurtains()
             setTimeout(() => {
+                window.scrollTo(0, 0)
                 $loading.classList.add('leave')
                 $loadingContainer.classList.add('disapear')
                 $moveCanvas.classList.add('appear')
