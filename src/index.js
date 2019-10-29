@@ -107,8 +107,8 @@ window.addEventListener('resize',resize)
 resize()
 
 // Cursor
-// const cursor = {}
-// const $mouse = $body.querySelector('.mouse')
+const cursor = {}
+const $mouse = $body.querySelector('.mouse')
 // let mouseIsHover = false
 // let rect = []
 
@@ -118,22 +118,33 @@ resize()
 //     rect.push($img.getBoundingClientRect())
 // }
 
-// window.addEventListener(
-//     'mousemove',
-//     (_e) =>
-//     {
-//         cursor.x = _e.clientX 
-//         cursor.y = _e.clientY 
-        
-//         // $mouse.style.top = `${cursor.y - 25}px`
-//         // $mouse.style.left = `${cursor.x - 25}px`
+window.addEventListener(
+    'mousemove',
+    (_e) =>
+    {
+        cursor.x = _e.clientX 
+        cursor.y = _e.clientY
 
-//         // if (cursor.x < rect[0].right && cursor.x > rect[0].left && cursor.y > rect[0].top && cursor.y < rect[0].bottom) 
-//         // {
-//         //     $mouse.classList.add('hover')
-//         // }
-//     }
-// )
+        if (!$mouse.classList.contains('appear')) {
+            setTimeout(() => {
+                $mouse.classList.add('appear')
+            }, 200)
+        }
+
+        // if (cursor.x < rect[0].right && cursor.x > rect[0].left && cursor.y > rect[0].top && cursor.y < rect[0].bottom) 
+        // {
+        //     $mouse.classList.add('hover')
+        // }
+    }
+)
+
+const animateMouse = () => {
+    let mouseY = `${cursor.y - 25}px`
+    let mouseX = `${cursor.x - 25}px`
+    window.requestAnimationFrame(animateMouse)
+    $mouse.style.transform = `translate(${mouseX}, ${mouseY})`
+}
+animateMouse()
 
 // Circle animation on canvas
 // let posX = 0, posY = 0, arc1 = 0, arc2 = 1*Math.PI, arc3 = 0.5 * Math.PI, arc4 = 1.5 * Math.PI, radius = 0,end = false, circleWidth = $canvas.width*20/100, ratio = $canvas.width/50

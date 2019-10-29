@@ -184,10 +184,16 @@ body
     height 50px
     border solid 0.5px black
     border-radius 100%
-    z-index -1
+    z-index 10
     transition transform 0.1s
-    &.hover
-        transform scale(1.5)
+    pointer-events none
+    opacity 0
+    @media all and (max-width: $mediumScreen)
+        display none
+    &.appear
+        opacity 1
+    // &.hover
+    //     transform scale(1.5)
         
 
 
