@@ -72,10 +72,33 @@ export default class Project
         this.contentDiv.classList.add('content')
         this.container.appendChild(this.contentDiv)
 
-        // Create index
+        // Create TopContainer
+        this.topContainer = document.createElement('div')
+        this.topContainer.classList.add('top-container')
+        this.contentDiv.appendChild(this.topContainer)
+
+        // Create index in TopContainer
         this.indexText = document.createElement('h3')
         this.indexText.innerText = `0${this.index}`
-        this.contentDiv.appendChild(this.indexText)
+        this.topContainer.appendChild(this.indexText)
+
+        if (this.container.dataset.tech)
+        {
+            // Create tech div in TopContainer
+            this.techDiv = document.createElement('div')
+            this.techDiv.classList.add('tech')
+            this.topContainer.appendChild(this.techDiv)
+    
+            // Create techInfos in techDiv
+            const techs = JSON.parse(this.container.dataset.tech)
+            for (const tech of techs) {
+                this.techInfos = document.createElement('img')
+                this.techInfos.classList.add('tech-logo')
+                this.techInfos.setAttribute('src', `./techs/${tech}.png`)
+                this.techDiv.appendChild(this.techInfos)
+            }
+        }
+
 
         // Create textdiv
         this.textDiv = document.createElement('div')
