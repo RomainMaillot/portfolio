@@ -36,6 +36,7 @@ export default class Project
         if (this.container.dataset.link) {
             this.link = document.createElement('a')
             this.link.classList.add('caselink')
+            this.link.classList.add('click')
             this.link.setAttribute('href', this.container.dataset.link)
             this.link.setAttribute('target', "_blank")
             this.imgDiv.appendChild(this.link)
@@ -120,6 +121,7 @@ export default class Project
             this.link = document.createElement('a')
             this.link.classList.add('link')
             this.link.classList.add('caselink')
+            this.link.classList.add('click')
             this.link.setAttribute('href', this.container.dataset.link)
             this.link.setAttribute('target', "_blank")
             this.link.setAttribute('infos', this.container.dataset.title)

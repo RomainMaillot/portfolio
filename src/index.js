@@ -139,12 +139,24 @@ window.addEventListener(
 )
 
 const animateMouse = () => {
-    let mouseY = `${cursor.y - 25}px`
-    let mouseX = `${cursor.x - 25}px`
+    let mouseY = `${cursor.y - 20}px`
+    let mouseX = `${cursor.x - 20}px`
     window.requestAnimationFrame(animateMouse)
     $mouse.style.transform = `translate(${mouseX}, ${mouseY})`
 }
 animateMouse()
+
+// Add event on hover
+const $hovers = $body.querySelectorAll('.click')
+
+for (const $hover of $hovers) {
+    $hover.addEventListener('mouseenter', () => {
+        $mouse.classList.add('hover')
+    })
+    $hover.addEventListener('mouseleave', () => {
+        $mouse.classList.remove('hover')
+    })
+}
 
 // Circle animation on canvas
 // let posX = 0, posY = 0, arc1 = 0, arc2 = 1*Math.PI, arc3 = 0.5 * Math.PI, arc4 = 1.5 * Math.PI, radius = 0,end = false, circleWidth = $canvas.width*20/100, ratio = $canvas.width/50
