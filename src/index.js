@@ -1,4 +1,5 @@
 import './css/style.styl'
+import cursorImage from './images/cursor.png'
 
 import Project from './js/projects'
 import * as data from './js/infos.json'
@@ -109,6 +110,7 @@ resize()
 // Cursor
 const cursor = {}
 const $mouse = $body.querySelector('.mouse')
+const $mouseMiddle = $body.querySelector('.mouse-middle')
 // let mouseIsHover = false
 // let rect = []
 
@@ -125,9 +127,10 @@ window.addEventListener(
         cursor.x = _e.clientX 
         cursor.y = _e.clientY
 
-        if (!$mouse.classList.contains('appear')) {
+        if (!$mouse.classList.contains('appear') || !$mouseMiddle.classList.contains('appear')) {
             setTimeout(() => {
                 $mouse.classList.add('appear')
+                $mouseMiddle.classList.add('appear')
             }, 200)
         }
 
@@ -141,8 +144,11 @@ window.addEventListener(
 const animateMouse = () => {
     let mouseY = `${cursor.y - 20}px`
     let mouseX = `${cursor.x - 20}px`
+    let mouseMiddleY = `${cursor.y - 4}px`
+    let mouseMiddleX = `${cursor.x - 4}px`
     window.requestAnimationFrame(animateMouse)
     $mouse.style.transform = `translate(${mouseX}, ${mouseY})`
+    $mouseMiddle.style.transform = `translate(${mouseMiddleX}, ${mouseMiddleY})`
 }
 animateMouse()
 

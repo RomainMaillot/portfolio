@@ -180,8 +180,9 @@ body
                             opacity 1
 .mouse
     position fixed
-    z-index 10
+    z-index 20
     transition transform 0.1s
+    will-change transform
     pointer-events none
     opacity 0
     @media all and (max-width: $mediumScreen)
@@ -199,6 +200,30 @@ body
         width 40px
         height 40px
         border solid 0.5px black
+        border-radius 100%
+        transition transform 0.3s
+.mouse-middle
+    position fixed
+    z-index 20
+    transition transform 0.05s ease
+    will-change transform
+    pointer-events none
+    opacity 0
+    @media all and (max-width: $mediumScreen)
+        display none
+    &.appear
+        opacity 1
+    &.hover
+        &:after
+            transform scale(1.2)
+    &::after
+        content ""
+        position absolute
+        top 0
+        left 0
+        width 8px
+        height 8px
+        background black
         border-radius 100%
         transition transform 0.3s
 
