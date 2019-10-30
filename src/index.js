@@ -1,5 +1,4 @@
 import './css/style.styl'
-import cursorImage from './images/cursor.png'
 
 import Project from './js/projects'
 import * as data from './js/infos.json'
@@ -158,9 +157,11 @@ const $hovers = $body.querySelectorAll('.click')
 for (const $hover of $hovers) {
     $hover.addEventListener('mouseenter', () => {
         $mouse.classList.add('hover')
+        $mouseMiddle.classList.add('hover')
     })
     $hover.addEventListener('mouseleave', () => {
         $mouse.classList.remove('hover')
+        $mouseMiddle.classList.remove('hover')
     })
 }
 
